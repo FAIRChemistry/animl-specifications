@@ -225,7 +225,7 @@ Multiple numeric values encoded as a base64 binary string. Uses little-endian by
 
 Upper boundary of an interval.
 
-- __values*__
+- __value*__
     - Type: float
     - Description: I: Individual integer value (32 bits, signed). L: Individual long integer value (64 bits, signed). F: Individual 32-bit floating point value. D: Individual 64-bit floating point value.
     - XML: float: I, float: L, float: F, float: D
@@ -381,7 +381,7 @@ Reference to an Extension to amend the active Technique Definition.
 
 Increment value
 
-- __values*__
+- __value*__
     - Type: float
     - Description: I: Individual integer value (32 bits, signed). L: Individual long integer value (64 bits, signed). F: Individual 32-bit floating point value. D: Individual 64-bit floating point value.
     - XML: float: I, float: L, float: F, float: D
@@ -391,7 +391,7 @@ Increment value
 Multiple Values explicitly specified.
 
 - __values*__
-    - Type: date, float, bool, bytes, string
+    - Type: string, date, bytes, bool, float
     - Multiple: True
     - Description: I: Individual integer value (32 bits, signed). L: Individual long integer value (64 bits, signed). F: Individual 32-bit floating point value. D: Individual 64-bit floating point value. S: Individual string value. Boolean: Individual boolean value. DateTime: Individual ISO date/time value. PNG: Base 64 encoded PNG image. EmbeddedXML: Value governed by a different XML Schema. SVG: Value governed by the SVG DTD. Used to represent vector graphic images.
     - XML: float: I, float: L, float: F, float: D, string: S, bool: Boolean, date: DateTime, bytes: PNG, string: EmbeddedXML, string: SVG
@@ -471,15 +471,15 @@ Name/Value Pair.
     - Type: string
     - Description: Data type of this parameter
     - XML: @parameterType
-- __values*__
-    - Type: date, float, bool, bytes, string
+- __value*__
+    - Type: string, date, bytes, bool, float
     - Description: I: Individual integer value (32 bits, signed). L: Individual long integer value (64 bits, signed). F: Individual 32-bit floating point value. D: Individual 64-bit floating point value. S: Individual string value. Boolean: Individual boolean value. DateTime: Individual ISO date/time value. PNG: Base 64 encoded PNG image. EmbeddedXML: Value governed by a different XML Schema. SVG: Value governed by the SVG DTD. Used to represent vector graphic images.
     - XML: float: I, float: L, float: F, float: D, string: S, bool: Boolean, date: DateTime, bytes: PNG, string: EmbeddedXML, string: SVG
 - __id__
     - Type: string
     - Description: Anchor point for digital signature. This identifier is referred to from the "Reference" element in a Signature. Unique per document.
     - XML: @id
-- __values__
+- __value__
     - Type: [SIUnit](#SIUnit)
     - Description: SIUnit: Combination of SI Units used to represent Scientific unit
     - XML: SIUnit: SIUnit
@@ -715,7 +715,7 @@ Container for multiple Values.
     - Type: string
     - Description: Specifies whether the data in this Series is typically plotted on a linear or logarithmic scale.
     - XML: @plotScale
-- __values__
+- __value__
     - Type: [IndividualValueSet, EncodedValueSet, AutoIncrementedValueSet](#IndividualValueSet, EncodedValueSet, AutoIncrementedValueSet)
     - Description: IndividualValueSet: Multiple Values explicitly specified. EncodedValueSet: Multiple numeric values encoded as a base64 binary string. Uses little-endian byte order. AutoIncrementedValueSet: Multiple values given in form of a start value and an increment.
     - XML: IndividualValueSet: IndividualValueSet, EncodedValueSet: EncodedValueSet, AutoIncrementedValueSet: AutoIncrementedValueSet
@@ -771,7 +771,7 @@ Software used to author this.
 
 Lower boundary of an interval or ValueSet.
 
-- __values*__
+- __value*__
     - Type: float
     - Description: I: Individual integer value (32 bits, signed). L: Individual long integer value (64 bits, signed). F: Individual 32-bit floating point value. D: Individual 64-bit floating point value.
     - XML: float: I, float: L, float: F, float: D
