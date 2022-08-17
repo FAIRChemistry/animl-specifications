@@ -23,19 +23,323 @@ ComplexType for the root element of an AnIML document.
     - Description: Container for digital signatures covering parts of this AnIML document.
     - XML: SignatureSet
 
-### SampleSet
+### AuditTrailEntry
 
-Container for Samples used in this AnIML document.
+Describes a set of changes made to the particular AnIML document by one user at a given time.
 
-- __sample*__
-    - Type: [Sample](#Sample)
-    - Multiple: True
-    - Description: Individual Sample, referenced from other parts of this AnIML document.
-    - XML: Sample
+- __timestamp*__
+    - Type: date
+    - Description: Date and time of modification.
+    - XML: Timestamp
+- __author*__
+    - Type: [Author](#Author)
+    - Description: Information about a person, a device or a piece of software authoring AnIML files.
+    - XML: Author
+- __action*__
+    - Type: string
+    - Description: Type of change made (created, modified, ...)
+    - XML: Action
 - __id__
     - Type: string
     - Description: Anchor point for digital signature. This identifier is referred to from the "Reference" element in a Signature. Unique per document.
     - XML: @id
+- __software__
+    - Type: [Software](#Software)
+    - Description: Software used to author this.
+    - XML: Software
+- __reason__
+    - Type: string
+    - Description: Explanation why changes were made.
+    - XML: Reason
+- __comment__
+    - Type: string
+    - Description: Human-readable comment further explaining the changes.
+    - XML: Comment
+- __diff__
+    - Type: [Diff](#Diff)
+    - Multiple: True
+    - Description: Machine-readable description of changes made.
+    - XML: Diff
+- __reference__
+    - Type: string
+    - Multiple: True
+    - Description: ID of the SignableItem that was affected. If none is specified, entire document is covered.
+    - XML: Reference
+
+### AuditTrailEntrySet
+
+Container for audit trail entries describing changes to this document.
+
+- __id__
+    - Type: string
+    - Description: Anchor point for digital signature. This identifier is referred to from the "Reference" element in a Signature. Unique per document.
+    - XML: @id
+- __audit_trail_entry__
+    - Type: [AuditTrailEntry](#AuditTrailEntry)
+    - Multiple: True
+    - Description: Describes a set of changes made to the particular AnIML document by one user at a given time.
+    - XML: AuditTrailEntry
+
+### Author
+
+Information about a person, a device or a piece of software authoring AnIML files.
+
+- __user_type*__
+    - Type: string
+    - Description: Type of user (human, device, software)
+    - XML: @userType
+- __name*__
+    - Type: string
+    - Description: Common name.
+    - XML: Name
+- __affiliation__
+    - Type: string
+    - Description: Organization the Author is affiliated with.
+    - XML: Affiliation
+- __role__
+    - Type: string
+    - Description: Role the Author plays within the organization.
+    - XML: Role
+- __email__
+    - Type: string
+    - Description: RFC822-compliant email address.
+    - XML: Email
+- __phone__
+    - Type: string
+    - Description: Phone number.
+    - XML: Phone
+- __location__
+    - Type: string
+    - Description: Location or physical address.
+    - XML: Location
+
+### AutoIncrementedValueSet
+
+Multiple values given in form of a start value and an increment.
+
+- __start_value*__
+    - Type: [StartValue](#StartValue)
+    - Description: Lower boundary of an interval or ValueSet.
+    - XML: StartValue
+- __increment*__
+    - Type: [Increment](#Increment)
+    - Description: Increment value
+    - XML: Increment
+- __start_index__
+    - Type: string
+    - Description: Zero-based index of the first entry in this Value Set. The specification is inclusive.
+    - XML: @startIndex
+- __end_index__
+    - Type: string
+    - Description: Zero-based index of the last entry in this Value Set. The specification is inclusive.
+    - XML: @endIndex
+
+### Category
+
+Defines a category of Parameters and SeriesSets. Used to model hierarchies.
+
+- __name*__
+    - Type: string
+    - Description: Plain-text name of this item.
+    - XML: @name
+- __id__
+    - Type: string
+    - Description: Anchor point for digital signature. This identifier is referred to from the "Reference" element in a Signature. Unique per document.
+    - XML: @id
+- __parameter__
+    - Type: [Parameter](#Parameter)
+    - Multiple: True
+    - Description: Name/Value Pair.
+    - XML: Parameter
+- __series_set__
+    - Type: [SeriesSet](#SeriesSet)
+    - Multiple: True
+    - Description: Container for n-dimensional Data.
+    - XML: SeriesSet
+- __category__
+    - Type: [Category](#Category)
+    - Multiple: True
+    - Description: Defines a category of Parameters and SeriesSets. Used to model hierarchies.
+    - XML: Category
+
+### Device
+
+Device used to perform experiment.
+
+- __name*__
+    - Type: string
+    - Description: Common name.
+    - XML: Name
+- __device_identifier__
+    - Type: string
+    - Description: Unique name or identifier of the device.
+    - XML: DeviceIdentifier
+- __manufacturer__
+    - Type: string
+    - Description: Company name.
+    - XML: Manufacturer
+- __firmware_version__
+    - Type: string
+    - Description: Version identifier of firmware release.
+    - XML: FirmwareVersion
+- __serial_number__
+    - Type: string
+    - Description: Unique serial number of device.
+    - XML: SerialNumber
+
+### Diff
+
+Machine-readable description of changes made.
+
+- __scope*__
+    - Type: string
+    - Description: Scope of diff. May be "element" or "attribute".
+    - XML: @scope
+- __changed_item*__
+    - Type: string
+    - Description: ID of the SignableItem that was changed
+    - XML: @changedItem
+- __old_value*__
+    - Type: string
+    - Description: 
+    - XML: OldValue
+- __new_value*__
+    - Type: string
+    - Description: 
+    - XML: NewValue
+
+### EncodedValueSet
+
+Multiple numeric values encoded as a base64 binary string. Uses little-endian byte order.
+
+- __start_index__
+    - Type: string
+    - Description: Zero-based index of the first entry in this Value Set. The specification is inclusive.
+    - XML: @startIndex
+- __end_index__
+    - Type: string
+    - Description: Zero-based index of the last entry in this Value Set. The specification is inclusive.
+    - XML: @endIndex
+
+### EndValue
+
+Upper boundary of an interval.
+
+- __values*__
+    - Type: float
+    - Description: I: Individual integer value (32 bits, signed). L: Individual long integer value (64 bits, signed). F: Individual 32-bit floating point value. D: Individual 64-bit floating point value.
+    - XML: float: I, float: L, float: F, float: D
+
+### ExperimentDataBulkReference
+
+Prefix-based reference to a set of Experiment Steps whose data are consumed.
+
+- __role*__
+    - Type: string
+    - Description: None
+    - XML: @role
+- __data_purpose*__
+    - Type: string
+    - Description: None
+    - XML: @dataPurpose
+- __experiment_step_id_prefix*__
+    - Type: string
+    - Description: None
+    - XML: @experimentStepIDPrefix
+- __id__
+    - Type: string
+    - Description: Anchor point for digital signature. This identifier is referred to from the "Reference" element in a Signature. Unique per document.
+    - XML: @id
+
+### ExperimentDataReference
+
+Reference to an Experiment Step whose data is consumed.
+
+- __role*__
+    - Type: string
+    - Description: None
+    - XML: @role
+- __data_purpose*__
+    - Type: string
+    - Description: None
+    - XML: @dataPurpose
+- __experiment_step_id*__
+    - Type: string
+    - Description: None
+    - XML: @experimentStepID
+- __id__
+    - Type: string
+    - Description: Anchor point for digital signature. This identifier is referred to from the "Reference" element in a Signature. Unique per document.
+    - XML: @id
+
+### ExperimentDataReferenceSet
+
+Set of Experiment Steps consumed by this Experiment Step.
+
+- __id__
+    - Type: string
+    - Description: Anchor point for digital signature. This identifier is referred to from the "Reference" element in a Signature. Unique per document.
+    - XML: @id
+- __experiment_data_reference__
+    - Type: [ExperimentDataReference](#ExperimentDataReference)
+    - Multiple: True
+    - Description: Reference to an Experiment Step whose data is consumed.
+    - XML: ExperimentDataReference
+- __experiment_data_bulk_reference__
+    - Type: [ExperimentDataBulkReference](#ExperimentDataBulkReference)
+    - Multiple: True
+    - Description: Prefix-based reference to a set of Experiment Steps whose data are consumed.
+    - XML: ExperimentDataBulkReference
+
+### ExperimentStep
+
+Container that documents a step in an experiment. Use one ExperimentStep per application of a Technique.
+
+- __name*__
+    - Type: string
+    - Description: Plain-text name of this item.
+    - XML: @name
+- __experiment_step_id*__
+    - Type: string
+    - Description: Unique identifier for this ExperimentStep. Used to point to this step from an ExperimentDataReference.
+    - XML: @experimentStepID
+- __id__
+    - Type: string
+    - Description: Anchor point for digital signature. This identifier is referred to from the "Reference" element in a Signature. Unique per document.
+    - XML: @id
+- __template_used__
+    - Type: string
+    - Description: None
+    - XML: @templateUsed
+- __comment__
+    - Type: string
+    - Description: Unstructured text comment to further describe the ExperimentStep.
+    - XML: @comment
+- __source_data_location__
+    - Type: string
+    - Description: Points to the original data source. May be a file name, uri, database ID, etc.
+    - XML: @sourceDataLocation
+- __tag_set__
+    - Type: [TagSet](#TagSet)
+    - Description: Set of Tag elements.
+    - XML: TagSet
+- __technique__
+    - Type: [Technique](#Technique)
+    - Description: Reference to Technique Definition used in this Experiment.
+    - XML: Technique
+- __infrastructure__
+    - Type: [Infrastructure](#Infrastructure)
+    - Description: Contains references to the context of this Experiment.
+    - XML: Infrastructure
+- __method__
+    - Type: [Method](#Method)
+    - Description: Describes how this Experiment was performed.
+    - XML: Method
+- __result__
+    - Type: [Result](#Result)
+    - Multiple: True
+    - Description: Container for Data derived from Experiment.
+    - XML: Result
 
 ### ExperimentStepSet
 
@@ -56,19 +360,203 @@ Container for multiple ExperimentSteps that describe the process and results.
     - Description: Represents a template for an ExperimentStep.
     - XML: Template
 
-### AuditTrailEntrySet
+### Extension
 
-Container for audit trail entries describing changes to this document.
+Reference to an Extension to amend the active Technique Definition.
+
+- __uri*__
+    - Type: string
+    - Description: URI where Extension file can be fetched.
+    - XML: @uri
+- __name*__
+    - Type: string
+    - Description: Name of Extension to be used. Must match Name given in Extension Definition file.
+    - XML: @name
+- __sha256__
+    - Type: string
+    - Description: SHA256 checksum of the referenced Extension. Hex encoded, lower cased. Similar to the output of the sha256 unix command.
+    - XML: @sha256
+
+### Increment
+
+Increment value
+
+- __values*__
+    - Type: float
+    - Description: I: Individual integer value (32 bits, signed). L: Individual long integer value (64 bits, signed). F: Individual 32-bit floating point value. D: Individual 64-bit floating point value.
+    - XML: float: I, float: L, float: F, float: D
+
+### IndividualValueSet
+
+Multiple Values explicitly specified.
+
+- __values*__
+    - Type: date, float, bool, bytes, string
+    - Multiple: True
+    - Description: I: Individual integer value (32 bits, signed). L: Individual long integer value (64 bits, signed). F: Individual 32-bit floating point value. D: Individual 64-bit floating point value. S: Individual string value. Boolean: Individual boolean value. DateTime: Individual ISO date/time value. PNG: Base 64 encoded PNG image. EmbeddedXML: Value governed by a different XML Schema. SVG: Value governed by the SVG DTD. Used to represent vector graphic images.
+    - XML: float: I, float: L, float: F, float: D, string: S, bool: Boolean, date: DateTime, bytes: PNG, string: EmbeddedXML, string: SVG
+- __start_index__
+    - Type: string
+    - Description: Zero-based index of the first entry in this Value Set. The specification is inclusive.
+    - XML: @startIndex
+- __end_index__
+    - Type: string
+    - Description: Zero-based index of the last entry in this Value Set. The specification is inclusive.
+    - XML: @endIndex
+
+### Infrastructure
+
+Contains references to the context of this Experiment.
 
 - __id__
     - Type: string
     - Description: Anchor point for digital signature. This identifier is referred to from the "Reference" element in a Signature. Unique per document.
     - XML: @id
-- __audit_trail_entry__
-    - Type: [AuditTrailEntry](#AuditTrailEntry)
+- __sample_reference_set__
+    - Type: [SampleReferenceSet](#SampleReferenceSet)
+    - Description: Set of Samples used in this Experiment.
+    - XML: SampleReferenceSet
+- __parent_data_point_reference_set__
+    - Type: [ParentDataPointReferenceSet](#ParentDataPointReferenceSet)
+    - Description: Contains references to the parent Result.
+    - XML: ParentDataPointReferenceSet
+- __experiment_data_reference_set__
+    - Type: [ExperimentDataReferenceSet](#ExperimentDataReferenceSet)
+    - Description: Set of Experiment Steps consumed by this Experiment Step.
+    - XML: ExperimentDataReferenceSet
+- __timestamp__
+    - Type: date
+    - Description: Date and time of modification.
+    - XML: Timestamp
+
+### Method
+
+Describes how this Experiment was performed.
+
+- __id__
+    - Type: string
+    - Description: Anchor point for digital signature. This identifier is referred to from the "Reference" element in a Signature. Unique per document.
+    - XML: @id
+- __name__
+    - Type: string
+    - Description: Optional method name, as defined in the instrument software.
+    - XML: @name
+- __author__
+    - Type: [Author](#Author)
+    - Description: Information about a person, a device or a piece of software authoring AnIML files.
+    - XML: Author
+- __device__
+    - Type: [Device](#Device)
+    - Description: Device used to perform experiment.
+    - XML: Device
+- __software__
+    - Type: [Software](#Software)
+    - Description: Software used to author this.
+    - XML: Software
+- __category__
+    - Type: [Category](#Category)
     - Multiple: True
-    - Description: Describes a set of changes made to the particular AnIML document by one user at a given time.
-    - XML: AuditTrailEntry
+    - Description: Defines a category of Parameters and SeriesSets. Used to model hierarchies.
+    - XML: Category
+
+### Parameter
+
+Name/Value Pair.
+
+- __name*__
+    - Type: string
+    - Description: Plain-text name of this item.
+    - XML: @name
+- __parameter_type*__
+    - Type: string
+    - Description: Data type of this parameter
+    - XML: @parameterType
+- __values*__
+    - Type: date, float, bool, bytes, string
+    - Description: I: Individual integer value (32 bits, signed). L: Individual long integer value (64 bits, signed). F: Individual 32-bit floating point value. D: Individual 64-bit floating point value. S: Individual string value. Boolean: Individual boolean value. DateTime: Individual ISO date/time value. PNG: Base 64 encoded PNG image. EmbeddedXML: Value governed by a different XML Schema. SVG: Value governed by the SVG DTD. Used to represent vector graphic images.
+    - XML: float: I, float: L, float: F, float: D, string: S, bool: Boolean, date: DateTime, bytes: PNG, string: EmbeddedXML, string: SVG
+- __id__
+    - Type: string
+    - Description: Anchor point for digital signature. This identifier is referred to from the "Reference" element in a Signature. Unique per document.
+    - XML: @id
+- __values__
+    - Type: [SIUnit](#SIUnit)
+    - Description: SIUnit: Combination of SI Units used to represent Scientific unit
+    - XML: SIUnit: SIUnit
+
+### ParentDataPointReference
+
+Reference to a data point or value range in an independent Series in the parent Result.
+
+- __series_id*__
+    - Type: string
+    - Description: Contains the ID of the Series referenced.
+    - XML: @seriesID
+- __start_value*__
+    - Type: [StartValue](#StartValue)
+    - Description: Lower boundary of an interval or ValueSet.
+    - XML: StartValue
+- __id__
+    - Type: string
+    - Description: Anchor point for digital signature. This identifier is referred to from the "Reference" element in a Signature. Unique per document.
+    - XML: @id
+- __end_value__
+    - Type: [EndValue](#EndValue)
+    - Description: Upper boundary of an interval.
+    - XML: EndValue
+
+### ParentDataPointReferenceSet
+
+Contains references to the parent Result.
+
+- __parent_data_point_reference*__
+    - Type: [ParentDataPointReference](#ParentDataPointReference)
+    - Multiple: True
+    - Description: Reference to a data point or value range in an independent Series in the parent Result.
+    - XML: ParentDataPointReference
+
+### Result
+
+Container for Data derived from Experiment.
+
+- __name*__
+    - Type: string
+    - Description: Plain-text name of this item.
+    - XML: @name
+- __id__
+    - Type: string
+    - Description: Anchor point for digital signature. This identifier is referred to from the "Reference" element in a Signature. Unique per document.
+    - XML: @id
+- __series_set__
+    - Type: [SeriesSet](#SeriesSet)
+    - Description: Container for n-dimensional Data.
+    - XML: SeriesSet
+- __category__
+    - Type: [Category](#Category)
+    - Multiple: True
+    - Description: Defines a category of Parameters and SeriesSets. Used to model hierarchies.
+    - XML: Category
+- __experiment_step_set__
+    - Type: [ExperimentStepSet](#ExperimentStepSet)
+    - Description: Container for multiple ExperimentSteps that describe the process and results.
+    - XML: ExperimentStepSet
+
+### SIUnit
+
+Combination of SI Units used to represent Scientific unit
+
+- __factor__
+    - Type: string
+    - Description: None
+    - XML: @factor
+- __exponent__
+    - Type: string
+    - Description: None
+    - XML: @exponent
+- __offset__
+    - Type: string
+    - Description: None
+    - XML: @offset
 
 ### Sample
 
@@ -124,245 +612,22 @@ Individual Sample, referenced from other parts of this AnIML document.
     - Description: Defines a category of Parameters and SeriesSets. Used to model hierarchies.
     - XML: Category
 
-### ExperimentStep
+### SampleInheritance
 
-Container that documents a step in an experiment. Use one ExperimentStep per application of a Technique.
+Indicates that a Sample was inherited from the parent ExperimentStep.
 
-- __name*__
+- __role*__
     - Type: string
-    - Description: Plain-text name of this item.
-    - XML: @name
-- __experiment_step_id*__
+    - Description: Role this sample plays within the current ExperimentStep.
+    - XML: @role
+- __sample_purpose*__
     - Type: string
-    - Description: Unique identifier for this ExperimentStep. Used to point to this step from an ExperimentDataReference.
-    - XML: @experimentStepID
+    - Description: Specifies whether the referenced sample is produced or consumed by the current ExperimentStep.
+    - XML: @samplePurpose
 - __id__
     - Type: string
     - Description: Anchor point for digital signature. This identifier is referred to from the "Reference" element in a Signature. Unique per document.
     - XML: @id
-- __template_used__
-    - Type: string
-    - Description: None
-    - XML: @templateUsed
-- __comment__
-    - Type: string
-    - Description: Unstructured text comment to further describe the ExperimentStep.
-    - XML: @comment
-- __source_data_location__
-    - Type: string
-    - Description: Points to the original data source. May be a file name, uri, database ID, etc.
-    - XML: @sourceDataLocation
-- __tag_set__
-    - Type: [TagSet](#TagSet)
-    - Description: Set of Tag elements.
-    - XML: TagSet
-- __technique__
-    - Type: [Technique](#Technique)
-    - Description: Reference to Technique Definition used in this Experiment.
-    - XML: Technique
-- __infrastructure__
-    - Type: [Infrastructure](#Infrastructure)
-    - Description: Contains references to the context of this Experiment.
-    - XML: Infrastructure
-- __method__
-    - Type: [Method](#Method)
-    - Description: Describes how this Experiment was performed.
-    - XML: Method
-- __result__
-    - Type: [Result](#Result)
-    - Multiple: True
-    - Description: Container for Data derived from Experiment.
-    - XML: Result
-
-### Template
-
-Represents a template for an ExperimentStep.
-
-- __name*__
-    - Type: string
-    - Description: Plain-text name of this item.
-    - XML: @name
-- __template_id*__
-    - Type: string
-    - Description: None
-    - XML: @templateID
-- __id__
-    - Type: string
-    - Description: Anchor point for digital signature. This identifier is referred to from the "Reference" element in a Signature. Unique per document.
-    - XML: @id
-- __source_data_location__
-    - Type: string
-    - Description: Points to the original data source. May be a file name, uri, database ID, etc.
-    - XML: @sourceDataLocation
-- __tag_set__
-    - Type: [TagSet](#TagSet)
-    - Description: Set of Tag elements.
-    - XML: TagSet
-- __technique__
-    - Type: [Technique](#Technique)
-    - Description: Reference to Technique Definition used in this Experiment.
-    - XML: Technique
-- __infrastructure__
-    - Type: [Infrastructure](#Infrastructure)
-    - Description: Contains references to the context of this Experiment.
-    - XML: Infrastructure
-- __method__
-    - Type: [Method](#Method)
-    - Description: Describes how this Experiment was performed.
-    - XML: Method
-- __result__
-    - Type: [Result](#Result)
-    - Multiple: True
-    - Description: Container for Data derived from Experiment.
-    - XML: Result
-
-### Method
-
-Describes how this Experiment was performed.
-
-- __id__
-    - Type: string
-    - Description: Anchor point for digital signature. This identifier is referred to from the "Reference" element in a Signature. Unique per document.
-    - XML: @id
-- __name__
-    - Type: string
-    - Description: Optional method name, as defined in the instrument software.
-    - XML: @name
-- __author__
-    - Type: [Author](#Author)
-    - Description: Information about a person, a device or a piece of software authoring AnIML files.
-    - XML: Author
-- __device__
-    - Type: [Device](#Device)
-    - Description: Device used to perform experiment.
-    - XML: Device
-- __software__
-    - Type: [Software](#Software)
-    - Description: Software used to author this.
-    - XML: Software
-- __category__
-    - Type: [Category](#Category)
-    - Multiple: True
-    - Description: Defines a category of Parameters and SeriesSets. Used to model hierarchies.
-    - XML: Category
-
-### Infrastructure
-
-Contains references to the context of this Experiment.
-
-- __id__
-    - Type: string
-    - Description: Anchor point for digital signature. This identifier is referred to from the "Reference" element in a Signature. Unique per document.
-    - XML: @id
-- __sample_reference_set__
-    - Type: [SampleReferenceSet](#SampleReferenceSet)
-    - Description: Set of Samples used in this Experiment.
-    - XML: SampleReferenceSet
-- __parent_data_point_reference_set__
-    - Type: [ParentDataPointReferenceSet](#ParentDataPointReferenceSet)
-    - Description: Contains references to the parent Result.
-    - XML: ParentDataPointReferenceSet
-- __experiment_data_reference_set__
-    - Type: [ExperimentDataReferenceSet](#ExperimentDataReferenceSet)
-    - Description: Set of Experiment Steps consumed by this Experiment Step.
-    - XML: ExperimentDataReferenceSet
-- __timestamp__
-    - Type: date
-    - Description: Date and time of modification.
-    - XML: Timestamp
-
-### SampleReferenceSet
-
-Set of Samples used in this Experiment.
-
-- __id__
-    - Type: string
-    - Description: Anchor point for digital signature. This identifier is referred to from the "Reference" element in a Signature. Unique per document.
-    - XML: @id
-- __sample_reference__
-    - Type: [SampleReference](#SampleReference)
-    - Multiple: True
-    - Description: Reference to a Sample used in this Experiment.
-    - XML: SampleReference
-- __sample_inheritance__
-    - Type: [SampleInheritance](#SampleInheritance)
-    - Multiple: True
-    - Description: Indicates that a Sample was inherited from the parent ExperimentStep.
-    - XML: SampleInheritance
-
-### Technique
-
-Reference to Technique Definition used in this Experiment.
-
-- __name*__
-    - Type: string
-    - Description: Plain-text name of this item.
-    - XML: @name
-- __uri*__
-    - Type: string
-    - Description: URI where Technique Definition file can be fetched.
-    - XML: @uri
-- __id__
-    - Type: string
-    - Description: Anchor point for digital signature. This identifier is referred to from the "Reference" element in a Signature. Unique per document.
-    - XML: @id
-- __sha256__
-    - Type: string
-    - Description: SHA256 checksum of the referenced Technique Definition. Hex encoded, lower cased. Similar to the output of the sha256 unix command.
-    - XML: @sha256
-- __extension__
-    - Type: [Extension](#Extension)
-    - Multiple: True
-    - Description: Reference to an Extension to amend the active Technique Definition.
-    - XML: Extension
-
-### Extension
-
-Reference to an Extension to amend the active Technique Definition.
-
-- __uri*__
-    - Type: string
-    - Description: URI where Extension file can be fetched.
-    - XML: @uri
-- __name*__
-    - Type: string
-    - Description: Name of Extension to be used. Must match Name given in Extension Definition file.
-    - XML: @name
-- __sha256__
-    - Type: string
-    - Description: SHA256 checksum of the referenced Extension. Hex encoded, lower cased. Similar to the output of the sha256 unix command.
-    - XML: @sha256
-
-### ParentDataPointReferenceSet
-
-Contains references to the parent Result.
-
-- __parent_data_point_reference*__
-    - Type: [ParentDataPointReference](#ParentDataPointReference)
-    - Multiple: True
-    - Description: Reference to a data point or value range in an independent Series in the parent Result.
-    - XML: ParentDataPointReference
-
-### ParentDataPointReference
-
-Reference to a data point or value range in an independent Series in the parent Result.
-
-- __series_id*__
-    - Type: string
-    - Description: Contains the ID of the Series referenced.
-    - XML: @seriesID
-- __start_value*__
-    - Type: [StartValue](#StartValue)
-    - Description: Lower boundary of an interval or ValueSet.
-    - XML: StartValue
-- __id__
-    - Type: string
-    - Description: Anchor point for digital signature. This identifier is referred to from the "Reference" element in a Signature. Unique per document.
-    - XML: @id
-- __end_value__
-    - Type: [EndValue](#EndValue)
-    - Description: Upper boundary of an interval.
-    - XML: EndValue
 
 ### SampleReference
 
@@ -385,127 +650,34 @@ Reference to a Sample used in this Experiment.
     - Description: Anchor point for digital signature. This identifier is referred to from the "Reference" element in a Signature. Unique per document.
     - XML: @id
 
-### SampleInheritance
+### SampleReferenceSet
 
-Indicates that a Sample was inherited from the parent ExperimentStep.
-
-- __role*__
-    - Type: string
-    - Description: Role this sample plays within the current ExperimentStep.
-    - XML: @role
-- __sample_purpose*__
-    - Type: string
-    - Description: Specifies whether the referenced sample is produced or consumed by the current ExperimentStep.
-    - XML: @samplePurpose
-- __id__
-    - Type: string
-    - Description: Anchor point for digital signature. This identifier is referred to from the "Reference" element in a Signature. Unique per document.
-    - XML: @id
-
-### ExperimentDataReferenceSet
-
-Set of Experiment Steps consumed by this Experiment Step.
+Set of Samples used in this Experiment.
 
 - __id__
     - Type: string
     - Description: Anchor point for digital signature. This identifier is referred to from the "Reference" element in a Signature. Unique per document.
     - XML: @id
-- __experiment_data_reference__
-    - Type: [ExperimentDataReference](#ExperimentDataReference)
+- __sample_reference__
+    - Type: [SampleReference](#SampleReference)
     - Multiple: True
-    - Description: Reference to an Experiment Step whose data is consumed.
-    - XML: ExperimentDataReference
-- __experiment_data_bulk_reference__
-    - Type: [ExperimentDataBulkReference](#ExperimentDataBulkReference)
+    - Description: Reference to a Sample used in this Experiment.
+    - XML: SampleReference
+- __sample_inheritance__
+    - Type: [SampleInheritance](#SampleInheritance)
     - Multiple: True
-    - Description: Prefix-based reference to a set of Experiment Steps whose data are consumed.
-    - XML: ExperimentDataBulkReference
+    - Description: Indicates that a Sample was inherited from the parent ExperimentStep.
+    - XML: SampleInheritance
 
-### ExperimentDataReference
+### SampleSet
 
-Reference to an Experiment Step whose data is consumed.
+Container for Samples used in this AnIML document.
 
-- __role*__
-    - Type: string
-    - Description: None
-    - XML: @role
-- __data_purpose*__
-    - Type: string
-    - Description: None
-    - XML: @dataPurpose
-- __experiment_step_id*__
-    - Type: string
-    - Description: None
-    - XML: @experimentStepID
-- __id__
-    - Type: string
-    - Description: Anchor point for digital signature. This identifier is referred to from the "Reference" element in a Signature. Unique per document.
-    - XML: @id
-
-### ExperimentDataBulkReference
-
-Prefix-based reference to a set of Experiment Steps whose data are consumed.
-
-- __role*__
-    - Type: string
-    - Description: None
-    - XML: @role
-- __data_purpose*__
-    - Type: string
-    - Description: None
-    - XML: @dataPurpose
-- __experiment_step_id_prefix*__
-    - Type: string
-    - Description: None
-    - XML: @experimentStepIDPrefix
-- __id__
-    - Type: string
-    - Description: Anchor point for digital signature. This identifier is referred to from the "Reference" element in a Signature. Unique per document.
-    - XML: @id
-
-### Result
-
-Container for Data derived from Experiment.
-
-- __name*__
-    - Type: string
-    - Description: Plain-text name of this item.
-    - XML: @name
-- __id__
-    - Type: string
-    - Description: Anchor point for digital signature. This identifier is referred to from the "Reference" element in a Signature. Unique per document.
-    - XML: @id
-- __series_set__
-    - Type: [SeriesSet](#SeriesSet)
-    - Description: Container for n-dimensional Data.
-    - XML: SeriesSet
-- __category__
-    - Type: [Category](#Category)
+- __sample*__
+    - Type: [Sample](#Sample)
     - Multiple: True
-    - Description: Defines a category of Parameters and SeriesSets. Used to model hierarchies.
-    - XML: Category
-- __experiment_step_set__
-    - Type: [ExperimentStepSet](#ExperimentStepSet)
-    - Description: Container for multiple ExperimentSteps that describe the process and results.
-    - XML: ExperimentStepSet
-
-### SeriesSet
-
-Container for n-dimensional Data.
-
-- __name*__
-    - Type: string
-    - Description: Plain-text name of this item.
-    - XML: @name
-- __length*__
-    - Type: string
-    - Description: Number of data points each Series contains.
-    - XML: @length
-- __series*__
-    - Type: [Series](#Series)
-    - Multiple: True
-    - Description: Container for multiple Values.
-    - XML: Series
+    - Description: Individual Sample, referenced from other parts of this AnIML document.
+    - XML: Sample
 - __id__
     - Type: string
     - Description: Anchor point for digital signature. This identifier is referred to from the "Reference" element in a Signature. Unique per document.
@@ -552,317 +724,27 @@ Container for multiple Values.
     - Description: Definition of a Scientific Unit.
     - XML: Unit
 
-### IndividualValueSet
+### SeriesSet
 
-Multiple Values explicitly specified.
-
-- __values*__
-    - Type: date, float, bool, bytes, string
-    - Multiple: True
-    - Description: I: Individual integer value (32 bits, signed). L: Individual long integer value (64 bits, signed). F: Individual 32-bit floating point value. D: Individual 64-bit floating point value. S: Individual string value. Boolean: Individual boolean value. DateTime: Individual ISO date/time value. PNG: Base 64 encoded PNG image. EmbeddedXML: Value governed by a different XML Schema. SVG: Value governed by the SVG DTD. Used to represent vector graphic images.
-    - XML: float: I, float: L, float: F, float: D, string: S, bool: Boolean, date: DateTime, bytes: PNG, string: EmbeddedXML, string: SVG
-- __start_index__
-    - Type: string
-    - Description: Zero-based index of the first entry in this Value Set. The specification is inclusive.
-    - XML: @startIndex
-- __end_index__
-    - Type: string
-    - Description: Zero-based index of the last entry in this Value Set. The specification is inclusive.
-    - XML: @endIndex
-
-### EncodedValueSet
-
-Multiple numeric values encoded as a base64 binary string. Uses little-endian byte order.
-
-- __start_index__
-    - Type: string
-    - Description: Zero-based index of the first entry in this Value Set. The specification is inclusive.
-    - XML: @startIndex
-- __end_index__
-    - Type: string
-    - Description: Zero-based index of the last entry in this Value Set. The specification is inclusive.
-    - XML: @endIndex
-
-### StartValue
-
-Lower boundary of an interval or ValueSet.
-
-- __values*__
-    - Type: float
-    - Description: I: Individual integer value (32 bits, signed). L: Individual long integer value (64 bits, signed). F: Individual 32-bit floating point value. D: Individual 64-bit floating point value.
-    - XML: float: I, float: L, float: F, float: D
-
-### EndValue
-
-Upper boundary of an interval.
-
-- __values*__
-    - Type: float
-    - Description: I: Individual integer value (32 bits, signed). L: Individual long integer value (64 bits, signed). F: Individual 32-bit floating point value. D: Individual 64-bit floating point value.
-    - XML: float: I, float: L, float: F, float: D
-
-### Increment
-
-Increment value
-
-- __values*__
-    - Type: float
-    - Description: I: Individual integer value (32 bits, signed). L: Individual long integer value (64 bits, signed). F: Individual 32-bit floating point value. D: Individual 64-bit floating point value.
-    - XML: float: I, float: L, float: F, float: D
-
-### AutoIncrementedValueSet
-
-Multiple values given in form of a start value and an increment.
-
-- __start_value*__
-    - Type: [StartValue](#StartValue)
-    - Description: Lower boundary of an interval or ValueSet.
-    - XML: StartValue
-- __increment*__
-    - Type: [Increment](#Increment)
-    - Description: Increment value
-    - XML: Increment
-- __start_index__
-    - Type: string
-    - Description: Zero-based index of the first entry in this Value Set. The specification is inclusive.
-    - XML: @startIndex
-- __end_index__
-    - Type: string
-    - Description: Zero-based index of the last entry in this Value Set. The specification is inclusive.
-    - XML: @endIndex
-
-### Unit
-
-Definition of a Scientific Unit.
-
-- __label*__
-    - Type: string
-    - Description: Defines the visual representation of a particular Unit.
-    - XML: @label
-- __quantity__
-    - Type: string
-    - Description: Quantity the unit can be applied to
-    - XML: @quantity
-- __si_unit__
-    - Type: [SIUnit](#SIUnit)
-    - Multiple: True
-    - Description: Combination of SI Units used to represent Scientific unit
-    - XML: SIUnit
-
-### SIUnit
-
-Combination of SI Units used to represent Scientific unit
-
-- __factor__
-    - Type: string
-    - Description: None
-    - XML: @factor
-- __exponent__
-    - Type: string
-    - Description: None
-    - XML: @exponent
-- __offset__
-    - Type: string
-    - Description: None
-    - XML: @offset
-
-### AuditTrailEntry
-
-Describes a set of changes made to the particular AnIML document by one user at a given time.
-
-- __timestamp*__
-    - Type: date
-    - Description: Date and time of modification.
-    - XML: Timestamp
-- __author*__
-    - Type: [Author](#Author)
-    - Description: Information about a person, a device or a piece of software authoring AnIML files.
-    - XML: Author
-- __action*__
-    - Type: string
-    - Description: Type of change made (created, modified, ...)
-    - XML: Action
-- __id__
-    - Type: string
-    - Description: Anchor point for digital signature. This identifier is referred to from the "Reference" element in a Signature. Unique per document.
-    - XML: @id
-- __software__
-    - Type: [Software](#Software)
-    - Description: Software used to author this.
-    - XML: Software
-- __reason__
-    - Type: string
-    - Description: Explanation why changes were made.
-    - XML: Reason
-- __comment__
-    - Type: string
-    - Description: Human-readable comment further explaining the changes.
-    - XML: Comment
-- __diff__
-    - Type: [Diff](#Diff)
-    - Multiple: True
-    - Description: Machine-readable description of changes made.
-    - XML: Diff
-- __reference__
-    - Type: string
-    - Multiple: True
-    - Description: ID of the SignableItem that was affected. If none is specified, entire document is covered.
-    - XML: Reference
-
-### Diff
-
-Machine-readable description of changes made.
-
-- __scope*__
-    - Type: string
-    - Description: Scope of diff. May be "element" or "attribute".
-    - XML: @scope
-- __changed_item*__
-    - Type: string
-    - Description: ID of the SignableItem that was changed
-    - XML: @changedItem
-- __old_value*__
-    - Type: string
-    - Description: 
-    - XML: OldValue
-- __new_value*__
-    - Type: string
-    - Description: 
-    - XML: NewValue
-
-### Category
-
-Defines a category of Parameters and SeriesSets. Used to model hierarchies.
+Container for n-dimensional Data.
 
 - __name*__
     - Type: string
     - Description: Plain-text name of this item.
     - XML: @name
+- __length*__
+    - Type: string
+    - Description: Number of data points each Series contains.
+    - XML: @length
+- __series*__
+    - Type: [Series](#Series)
+    - Multiple: True
+    - Description: Container for multiple Values.
+    - XML: Series
 - __id__
     - Type: string
     - Description: Anchor point for digital signature. This identifier is referred to from the "Reference" element in a Signature. Unique per document.
     - XML: @id
-- __parameter__
-    - Type: [Parameter](#Parameter)
-    - Multiple: True
-    - Description: Name/Value Pair.
-    - XML: Parameter
-- __series_set__
-    - Type: [SeriesSet](#SeriesSet)
-    - Multiple: True
-    - Description: Container for n-dimensional Data.
-    - XML: SeriesSet
-- __category__
-    - Type: [Category](#Category)
-    - Multiple: True
-    - Description: Defines a category of Parameters and SeriesSets. Used to model hierarchies.
-    - XML: Category
-
-### Parameter
-
-Name/Value Pair.
-
-- __name*__
-    - Type: string
-    - Description: Plain-text name of this item.
-    - XML: @name
-- __parameter_type*__
-    - Type: string
-    - Description: Data type of this parameter
-    - XML: @parameterType
-- __values*__
-    - Type: date, float, bool, bytes, string
-    - Description: I: Individual integer value (32 bits, signed). L: Individual long integer value (64 bits, signed). F: Individual 32-bit floating point value. D: Individual 64-bit floating point value. S: Individual string value. Boolean: Individual boolean value. DateTime: Individual ISO date/time value. PNG: Base 64 encoded PNG image. EmbeddedXML: Value governed by a different XML Schema. SVG: Value governed by the SVG DTD. Used to represent vector graphic images.
-    - XML: float: I, float: L, float: F, float: D, string: S, bool: Boolean, date: DateTime, bytes: PNG, string: EmbeddedXML, string: SVG
-- __id__
-    - Type: string
-    - Description: Anchor point for digital signature. This identifier is referred to from the "Reference" element in a Signature. Unique per document.
-    - XML: @id
-- __values__
-    - Type: [SIUnit](#SIUnit)
-    - Description: SIUnit: Combination of SI Units used to represent Scientific unit
-    - XML: SIUnit: SIUnit
-
-### TagSet
-
-Set of Tag elements.
-
-- __tag__
-    - Type: [Tag](#Tag)
-    - Multiple: True
-    - Description: Tag to mark related data items. When a value is given, it may also serve as a reference to an external data system.
-    - XML: Tag
-
-### Tag
-
-Tag to mark related data items. When a value is given, it may also serve as a reference to an external data system.
-
-- __name*__
-    - Type: string
-    - Description: None
-    - XML: @name
-- __value__
-    - Type: string
-    - Description: None
-    - XML: @value
-
-### Author
-
-Information about a person, a device or a piece of software authoring AnIML files.
-
-- __user_type*__
-    - Type: string
-    - Description: Type of user (human, device, software)
-    - XML: @userType
-- __name*__
-    - Type: string
-    - Description: Common name.
-    - XML: Name
-- __affiliation__
-    - Type: string
-    - Description: Organization the Author is affiliated with.
-    - XML: Affiliation
-- __role__
-    - Type: string
-    - Description: Role the Author plays within the organization.
-    - XML: Role
-- __email__
-    - Type: string
-    - Description: RFC822-compliant email address.
-    - XML: Email
-- __phone__
-    - Type: string
-    - Description: Phone number.
-    - XML: Phone
-- __location__
-    - Type: string
-    - Description: Location or physical address.
-    - XML: Location
-
-### Device
-
-Device used to perform experiment.
-
-- __name*__
-    - Type: string
-    - Description: Common name.
-    - XML: Name
-- __device_identifier__
-    - Type: string
-    - Description: Unique name or identifier of the device.
-    - XML: DeviceIdentifier
-- __manufacturer__
-    - Type: string
-    - Description: Company name.
-    - XML: Manufacturer
-- __firmware_version__
-    - Type: string
-    - Description: Version identifier of firmware release.
-    - XML: FirmwareVersion
-- __serial_number__
-    - Type: string
-    - Description: Unique serial number of device.
-    - XML: SerialNumber
 
 ### Software
 
@@ -884,3 +766,121 @@ Software used to author this.
     - Type: string
     - Description: Operating system the software was running on.
     - XML: OperatingSystem
+
+### StartValue
+
+Lower boundary of an interval or ValueSet.
+
+- __values*__
+    - Type: float
+    - Description: I: Individual integer value (32 bits, signed). L: Individual long integer value (64 bits, signed). F: Individual 32-bit floating point value. D: Individual 64-bit floating point value.
+    - XML: float: I, float: L, float: F, float: D
+
+### Tag
+
+Tag to mark related data items. When a value is given, it may also serve as a reference to an external data system.
+
+- __name*__
+    - Type: string
+    - Description: None
+    - XML: @name
+- __value__
+    - Type: string
+    - Description: None
+    - XML: @value
+
+### TagSet
+
+Set of Tag elements.
+
+- __tag__
+    - Type: [Tag](#Tag)
+    - Multiple: True
+    - Description: Tag to mark related data items. When a value is given, it may also serve as a reference to an external data system.
+    - XML: Tag
+
+### Technique
+
+Reference to Technique Definition used in this Experiment.
+
+- __name*__
+    - Type: string
+    - Description: Plain-text name of this item.
+    - XML: @name
+- __uri*__
+    - Type: string
+    - Description: URI where Technique Definition file can be fetched.
+    - XML: @uri
+- __id__
+    - Type: string
+    - Description: Anchor point for digital signature. This identifier is referred to from the "Reference" element in a Signature. Unique per document.
+    - XML: @id
+- __sha256__
+    - Type: string
+    - Description: SHA256 checksum of the referenced Technique Definition. Hex encoded, lower cased. Similar to the output of the sha256 unix command.
+    - XML: @sha256
+- __extension__
+    - Type: [Extension](#Extension)
+    - Multiple: True
+    - Description: Reference to an Extension to amend the active Technique Definition.
+    - XML: Extension
+
+### Template
+
+Represents a template for an ExperimentStep.
+
+- __name*__
+    - Type: string
+    - Description: Plain-text name of this item.
+    - XML: @name
+- __template_id*__
+    - Type: string
+    - Description: None
+    - XML: @templateID
+- __id__
+    - Type: string
+    - Description: Anchor point for digital signature. This identifier is referred to from the "Reference" element in a Signature. Unique per document.
+    - XML: @id
+- __source_data_location__
+    - Type: string
+    - Description: Points to the original data source. May be a file name, uri, database ID, etc.
+    - XML: @sourceDataLocation
+- __tag_set__
+    - Type: [TagSet](#TagSet)
+    - Description: Set of Tag elements.
+    - XML: TagSet
+- __technique__
+    - Type: [Technique](#Technique)
+    - Description: Reference to Technique Definition used in this Experiment.
+    - XML: Technique
+- __infrastructure__
+    - Type: [Infrastructure](#Infrastructure)
+    - Description: Contains references to the context of this Experiment.
+    - XML: Infrastructure
+- __method__
+    - Type: [Method](#Method)
+    - Description: Describes how this Experiment was performed.
+    - XML: Method
+- __result__
+    - Type: [Result](#Result)
+    - Multiple: True
+    - Description: Container for Data derived from Experiment.
+    - XML: Result
+
+### Unit
+
+Definition of a Scientific Unit.
+
+- __label*__
+    - Type: string
+    - Description: Defines the visual representation of a particular Unit.
+    - XML: @label
+- __quantity__
+    - Type: string
+    - Description: Quantity the unit can be applied to
+    - XML: @quantity
+- __si_unit__
+    - Type: [SIUnit](#SIUnit)
+    - Multiple: True
+    - Description: Combination of SI Units used to represent Scientific unit
+    - XML: SIUnit
