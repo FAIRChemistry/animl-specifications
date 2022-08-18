@@ -1,3 +1,15 @@
+# Analytical Information Markup Language
+
+An AnIML file (also called an instance in XML speak) is an XML representation of a piece of analytical data gathered from an instrument. The format of AnIML files is structured based off of a set of rules - a schema file (see "Core Schema"). The schema dictates the elements (tags) allowed in the file, the data type of the information in the elements, and even (if required) what values are allowed within an element. If an AnIML file is written in accordance with the published schema it is said to be "a valid instance file".
+
+The core AnIML schema outlines that an AnIML file has the following main elements
+
+- where information about the sample(s) the data is/are stored
+- where information about the instrument, analytical methodology, and the result data is stored
+- where information about events that relate to the data stored in the file is stored
+- optional element for digital signatures on the file (see http://www.w3.org/TR/2008/REC-xmldsig-core-20080610/)
+
+
 ### AnIML
 
 ComplexType for the root element of an AnIML document.
