@@ -616,7 +616,7 @@ Name/Value Pair.
 - __value*__
     - Type: int, float, string, bool, datetime, bytes
     - Description: I: Individual integer value (32 bits, signed). L: Individual long integer value (64 bits, signed). F: Individual 32-bit floating point value. D: Individual 64-bit floating point value. S: Individual string value. Boolean: Individual boolean value. DateTime: Individual ISO date/time value. PNG: Base 64 encoded PNG image. EmbeddedXML: Value governed by a different XML Schema. SVG: Value governed by the SVG DTD. Used to represent vector graphic images.
-    - XML: int: I, float: L, float: F, float: D, string: S, bool: Boolean, datetime: DateTime, bytes: PNG, string: EmbeddedXML, string: SVG
+    - XML: {int: I, float: F, string: S, bool: Boolean, datetime: DateTime, bytes: PNG}
 - __id__
     - Type: string
     - Description: Anchor point for digital signature. This identifier is referred to from the "Reference" element in a Signature. Unique per document.
@@ -759,10 +759,10 @@ Container for multiple Values.
     - Type: string
     - Description: Specifies whether the data in this Series is typically plotted on a linear or logarithmic scale.
     - XML: @plotScale
-- __value__
+- __value_set__
     - Type: [IndividualValueSet, EncodedValueSet, AutoIncrementedValueSet](#IndividualValueSet, EncodedValueSet, AutoIncrementedValueSet)
     - Description: IndividualValueSet: Multiple Values explicitly specified. EncodedValueSet: Multiple numeric values encoded as a base64 binary string. Uses little-endian byte order. AutoIncrementedValueSet: Multiple values given in form of a start value and an increment.
-    - XML: IndividualValueSet: IndividualValueSet, EncodedValueSet: EncodedValueSet, AutoIncrementedValueSet: AutoIncrementedValueSet
+    - XML: {IndividualValueSet: IndividualValueSet, EncodedValueSet: EncodedValueSet, AutoIncrementedValueSet: AutoIncrementedValueSet}
 - __unit__
     - Type: [Unit](#Unit)
     - Description: Definition of a Scientific Unit.
@@ -792,7 +792,7 @@ Upper boundary of an interval.
 - __value*__
     - Type: int, float
     - Description: I: Individual integer value (32 bits, signed). L: Individual long integer value (64 bits, signed). F: Individual 32-bit floating point value. D: Individual 64-bit floating point value.
-    - XML: int: I, float: L, float: F, float: D
+    - XML: {int: I, float: F}
 
 ### IndividualValueSet
 
@@ -802,7 +802,7 @@ Multiple Values explicitly specified.
     - Type: int, float, string, bool, datetime, bytes
     - Multiple: True
     - Description: I: Individual integer value (32 bits, signed). L: Individual long integer value (64 bits, signed). F: Individual 32-bit floating point value. D: Individual 64-bit floating point value. S: Individual string value. Boolean: Individual boolean value. DateTime: Individual ISO date/time value. PNG: Base 64 encoded PNG image. EmbeddedXML: Value governed by a different XML Schema. SVG: Value governed by the SVG DTD. Used to represent vector graphic images.
-    - XML: int: I, float: L, float: F, float: D, string: S, bool: Boolean, datetime: DateTime, bytes: PNG, string: EmbeddedXML, string: SVG
+    - XML: {int: I, float: F, string: S, bool: Boolean, datetime: DateTime, bytes: PNG}
 - __start_index__
     - Type: string
     - Description: Zero-based index of the first entry in this Value Set. The specification is inclusive.
@@ -871,7 +871,7 @@ Lower boundary of an interval or ValueSet.
 - __value*__
     - Type: int, float
     - Description: I: Individual integer value (32 bits, signed). L: Individual long integer value (64 bits, signed). F: Individual 32-bit floating point value. D: Individual 64-bit floating point value.
-    - XML: int: I, float: L, float: F, float: D
+    - XML: {int: I, float: F}
 
 ### Increment
 
@@ -880,4 +880,4 @@ Increment value
 - __value*__
     - Type: int, float
     - Description: I: Individual integer value (32 bits, signed). L: Individual long integer value (64 bits, signed). F: Individual 32-bit floating point value. D: Individual 64-bit floating point value.
-    - XML: int: I, float: L, float: F, float: D
+    - XML: {int: I, float: F}
