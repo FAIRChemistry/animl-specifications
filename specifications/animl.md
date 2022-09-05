@@ -10,6 +10,7 @@ ComplexType for the root element of an AnIML document.
 - __version*__
     - Type: string
     - Description: Version number of the AnIML Core Schema used in this document. Must be "0.90".
+    - Default: 0.90
     - XML: @version
 - __sample_set__
     - Type: [SampleSet](#SampleSet)
