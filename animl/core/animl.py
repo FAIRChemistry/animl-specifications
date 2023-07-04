@@ -6,8 +6,8 @@ from sdRDM.base.utils import forge_signature, IDGenerator
 
 
 from .audittrailentryset import AuditTrailEntrySet
-from .experimentstepset import ExperimentStepSet
 from .sampleset import SampleSet
+from .experimentstepset import ExperimentStepSet
 
 
 @forge_signature

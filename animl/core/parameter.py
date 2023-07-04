@@ -49,15 +49,6 @@ class Parameter(sdRDM.DataModel):
         ),
     )
 
-    id: Optional[str] = Field(
-        default=None,
-        description=(
-            "Anchor point for digital signature. This identifier is referred to from"
-            " the 'Reference' element in a Signature. Unique per document."
-        ),
-        xml="@id",
-    )
-
     unit: Optional[SIUnit] = Field(
         default=None,
         description="SIUnit: Combination of SI Units used to represent Scientific unit",

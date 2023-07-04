@@ -6,9 +6,9 @@ from sdRDM.base.listplus import ListPlus
 from sdRDM.base.utils import forge_signature, IDGenerator
 
 
-from .encodedvalueset import EncodedValueSet
-from .autoincrementedvalueset import AutoIncrementedValueSet
 from .individualvalueset import IndividualValueSet
+from .autoincrementedvalueset import AutoIncrementedValueSet
+from .encodedvalueset import EncodedValueSet
 from .unit import Unit
 from .series import Series
 
@@ -43,22 +43,12 @@ class SeriesSet(sdRDM.DataModel):
         default_factory=ListPlus,
     )
 
-    id: Optional[str] = Field(
-        default=None,
-        description=(
-            "Anchor point for digital signature. This identifier is referred to from"
-            " the 'Reference' element in a Signature. Unique per document."
-        ),
-        xml="@id",
-    )
-
     def add_to_series(
         self,
         name: str,
         dependency: str,
         series_id: str,
         series_type: str,
-        id: Optional[str] = None,
         visible: Optional[str] = None,
         plot_scale: Optional[str] = None,
         value_set: Union[
@@ -76,7 +66,6 @@ class SeriesSet(sdRDM.DataModel):
             dependency (): Specified whether the Series is independent or dependent..
             series_id (): Identifies the Series. Used in References from subordinate ExperimentSteps. Unique per SeriesSet..
             series_type (): Data type used by all values in this Series..
-            id (): Anchor point for digital signature. This identifier is referred to from the 'Reference' element in a Signature. Unique per document.. Defaults to None
             visible (): Specifies whether data in this Series is to be displayed to the user by default.. Defaults to None
             plot_scale (): Specifies whether the data in this Series is typically plotted on a linear or logarithmic scale.. Defaults to None
             value_set (): IndividualValueSet: Multiple Values explicitly specified. EncodedValueSet: Multiple numeric values encoded as a base64 binary string. Uses little-endian byte order. AutoIncrementedValueSet: Multiple values given in form of a start value and an increment.. Defaults to None
@@ -88,7 +77,6 @@ class SeriesSet(sdRDM.DataModel):
             "dependency": dependency,
             "series_id": series_id,
             "series_type": series_type,
-            "id": id,
             "visible": visible,
             "plot_scale": plot_scale,
             "value_set": value_set,

@@ -21,15 +21,6 @@ class SampleReferenceSet(sdRDM.DataModel):
         xml="@id",
     )
 
-    id: Optional[str] = Field(
-        default=None,
-        description=(
-            "Anchor point for digital signature. This identifier is referred to from"
-            " the 'Reference' element in a Signature. Unique per document."
-        ),
-        xml="@id",
-    )
-
     sample_reference: List[SampleReference] = Field(
         default_factory=ListPlus,
         multiple=True,
@@ -47,12 +38,7 @@ class SampleReferenceSet(sdRDM.DataModel):
     )
 
     def add_to_sample_reference(
-        self,
-        sample_id: str,
-        role: str,
-        sample_purpose: str,
-        id: Optional[str] = None,
-        id: Optional[str] = None,
+        self, sample_id: str, role: str, sample_purpose: str, id: Optional[str] = None
     ) -> None:
         """
         This method adds an object of type 'SampleReference' to attribute sample_reference
@@ -62,14 +48,12 @@ class SampleReferenceSet(sdRDM.DataModel):
             sample_id (): SampleID of the Sample used in the current ExperimentStep. Refers to the sampleID within the SampleSet section of the document..
             role (): Role this sample plays within the current ExperimentStep..
             sample_purpose (): Specifies whether the referenced sample is produced or consumed by the current ExperimentStep..
-            id (): Anchor point for digital signature. This identifier is referred to from the 'Reference' element in a Signature. Unique per document.. Defaults to None
         """
 
         params = {
             "sample_id": sample_id,
             "role": role,
             "sample_purpose": sample_purpose,
-            "id": id,
         }
 
         if id is not None:
@@ -80,11 +64,7 @@ class SampleReferenceSet(sdRDM.DataModel):
         return self.sample_reference[-1]
 
     def add_to_sample_inheritance(
-        self,
-        role: str,
-        sample_purpose: str,
-        id: Optional[str] = None,
-        id: Optional[str] = None,
+        self, role: str, sample_purpose: str, id: Optional[str] = None
     ) -> None:
         """
         This method adds an object of type 'SampleInheritance' to attribute sample_inheritance
@@ -93,13 +73,11 @@ class SampleReferenceSet(sdRDM.DataModel):
             id (str): Unique identifier of the 'SampleInheritance' object. Defaults to 'None'.
             role (): Role this sample plays within the current ExperimentStep..
             sample_purpose (): Specifies whether the referenced sample is produced or consumed by the current ExperimentStep..
-            id (): Anchor point for digital signature. This identifier is referred to from the 'Reference' element in a Signature. Unique per document.. Defaults to None
         """
 
         params = {
             "role": role,
             "sample_purpose": sample_purpose,
-            "id": id,
         }
 
         if id is not None:

@@ -6,13 +6,13 @@ from sdRDM.base.listplus import ListPlus
 from sdRDM.base.utils import forge_signature, IDGenerator
 
 
+from .result import Result
+from .technique import Technique
+from .category import Category
+from .seriesset import SeriesSet
+from .tagset import TagSet
 from .infrastructure import Infrastructure
 from .method import Method
-from .technique import Technique
-from .tagset import TagSet
-from .seriesset import SeriesSet
-from .result import Result
-from .category import Category
 
 
 @forge_signature
@@ -36,15 +36,6 @@ class Template(sdRDM.DataModel):
         ...,
         description="None",
         xml="@templateID",
-    )
-
-    id: Optional[str] = Field(
-        default=None,
-        description=(
-            "Anchor point for digital signature. This identifier is referred to from"
-            " the 'Reference' element in a Signature. Unique per document."
-        ),
-        xml="@id",
     )
 
     source_data_location: Optional[str] = Field(
@@ -90,7 +81,6 @@ class Template(sdRDM.DataModel):
     def add_to_result(
         self,
         name: str,
-        id: Optional[str] = None,
         series_set: Optional[SeriesSet] = None,
         category: List[Category] = ListPlus(),
         id: Optional[str] = None,
@@ -101,14 +91,12 @@ class Template(sdRDM.DataModel):
         Args:
             id (str): Unique identifier of the 'Result' object. Defaults to 'None'.
             name (): Plain-text name of this item..
-            id (): Anchor point for digital signature. This identifier is referred to from the 'Reference' element in a Signature. Unique per document.. Defaults to None
             series_set (): Container for n-dimensional Data.. Defaults to None
             category (): Defines a category of Parameters and SeriesSets. Used to model hierarchies.. Defaults to ListPlus()
         """
 
         params = {
             "name": name,
-            "id": id,
             "series_set": series_set,
             "category": category,
         }

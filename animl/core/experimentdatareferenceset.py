@@ -6,8 +6,8 @@ from sdRDM.base.listplus import ListPlus
 from sdRDM.base.utils import forge_signature, IDGenerator
 
 
-from .experimentdatareference import ExperimentDataReference
 from .experimentdatabulkreference import ExperimentDataBulkReference
+from .experimentdatareference import ExperimentDataReference
 
 
 @forge_signature
@@ -18,15 +18,6 @@ class ExperimentDataReferenceSet(sdRDM.DataModel):
     id: Optional[str] = Field(
         description="Unique identifier of the given object.",
         default_factory=IDGenerator("experimentdatareferencesetINDEX"),
-        xml="@id",
-    )
-
-    id: Optional[str] = Field(
-        default=None,
-        description=(
-            "Anchor point for digital signature. This identifier is referred to from"
-            " the 'Reference' element in a Signature. Unique per document."
-        ),
         xml="@id",
     )
 
@@ -53,7 +44,6 @@ class ExperimentDataReferenceSet(sdRDM.DataModel):
         data_purpose: str,
         experiment_step_id: str,
         id: Optional[str] = None,
-        id: Optional[str] = None,
     ) -> None:
         """
         This method adds an object of type 'ExperimentDataReference' to attribute experiment_data_reference
@@ -63,14 +53,12 @@ class ExperimentDataReferenceSet(sdRDM.DataModel):
             role (): None.
             data_purpose (): None.
             experiment_step_id (): None.
-            id (): Anchor point for digital signature. This identifier is referred to from the 'Reference' element in a Signature. Unique per document.. Defaults to None
         """
 
         params = {
             "role": role,
             "data_purpose": data_purpose,
             "experiment_step_id": experiment_step_id,
-            "id": id,
         }
 
         if id is not None:
@@ -86,7 +74,6 @@ class ExperimentDataReferenceSet(sdRDM.DataModel):
         data_purpose: str,
         experiment_step_id_prefix: str,
         id: Optional[str] = None,
-        id: Optional[str] = None,
     ) -> None:
         """
         This method adds an object of type 'ExperimentDataBulkReference' to attribute experiment_data_bulk_reference
@@ -96,14 +83,12 @@ class ExperimentDataReferenceSet(sdRDM.DataModel):
             role (): None.
             data_purpose (): None.
             experiment_step_id_prefix (): None.
-            id (): Anchor point for digital signature. This identifier is referred to from the 'Reference' element in a Signature. Unique per document.. Defaults to None
         """
 
         params = {
             "role": role,
             "data_purpose": data_purpose,
             "experiment_step_id_prefix": experiment_step_id_prefix,
-            "id": id,
         }
 
         if id is not None:

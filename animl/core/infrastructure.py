@@ -6,9 +6,9 @@ from sdRDM.base.utils import forge_signature, IDGenerator
 
 from datetime import datetime as Datetime
 
+from .samplereferenceset import SampleReferenceSet
 from .parentdatapointreferenceset import ParentDataPointReferenceSet
 from .experimentdatareferenceset import ExperimentDataReferenceSet
-from .samplereferenceset import SampleReferenceSet
 
 
 @forge_signature
@@ -19,15 +19,6 @@ class Infrastructure(sdRDM.DataModel):
     id: Optional[str] = Field(
         description="Unique identifier of the given object.",
         default_factory=IDGenerator("infrastructureINDEX"),
-        xml="@id",
-    )
-
-    id: Optional[str] = Field(
-        default=None,
-        description=(
-            "Anchor point for digital signature. This identifier is referred to from"
-            " the 'Reference' element in a Signature. Unique per document."
-        ),
         xml="@id",
     )
 

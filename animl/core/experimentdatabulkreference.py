@@ -33,12 +33,3 @@ class ExperimentDataBulkReference(sdRDM.DataModel):
         description="None",
         xml="@experimentStepIDPrefix",
     )
-
-    id: Optional[str] = Field(
-        default=None,
-        description=(
-            "Anchor point for digital signature. This identifier is referred to from"
-            " the 'Reference' element in a Signature. Unique per document."
-        ),
-        xml="@id",
-    )

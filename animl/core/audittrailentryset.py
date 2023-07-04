@@ -7,10 +7,10 @@ from sdRDM.base.utils import forge_signature, IDGenerator
 
 from datetime import datetime as Datetime
 
-from .diff import Diff
 from .audittrailentry import AuditTrailEntry
-from .author import Author
 from .software import Software
+from .diff import Diff
+from .author import Author
 
 
 @forge_signature
@@ -21,15 +21,6 @@ class AuditTrailEntrySet(sdRDM.DataModel):
     id: Optional[str] = Field(
         description="Unique identifier of the given object.",
         default_factory=IDGenerator("audittrailentrysetINDEX"),
-        xml="@id",
-    )
-
-    id: Optional[str] = Field(
-        default=None,
-        description=(
-            "Anchor point for digital signature. This identifier is referred to from"
-            " the 'Reference' element in a Signature. Unique per document."
-        ),
         xml="@id",
     )
 
@@ -48,7 +39,6 @@ class AuditTrailEntrySet(sdRDM.DataModel):
         timestamp: Datetime,
         author: Author,
         action: str,
-        id: Optional[str] = None,
         software: Optional[Software] = None,
         reason: Optional[str] = None,
         comment: Optional[str] = None,
@@ -64,7 +54,6 @@ class AuditTrailEntrySet(sdRDM.DataModel):
             timestamp (): Date and time of modification..
             author (): Information about a person, a device or a piece of software authoring AnIML files..
             action (): Type of change made (created, modified, ...).
-            id (): Anchor point for digital signature. This identifier is referred to from the 'Reference' element in a Signature. Unique per document.. Defaults to None
             software (): Software used to author this.. Defaults to None
             reason (): Explanation why changes were made.. Defaults to None
             comment (): Human-readable comment further explaining the changes.. Defaults to None
@@ -76,7 +65,6 @@ class AuditTrailEntrySet(sdRDM.DataModel):
             "timestamp": timestamp,
             "author": author,
             "action": action,
-            "id": id,
             "software": software,
             "reason": reason,
             "comment": comment,

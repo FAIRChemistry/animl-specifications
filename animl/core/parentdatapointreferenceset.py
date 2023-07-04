@@ -6,8 +6,8 @@ from sdRDM.base.listplus import ListPlus
 from sdRDM.base.utils import forge_signature, IDGenerator
 
 
-from .endvalue import EndValue
 from .startvalue import StartValue
+from .endvalue import EndValue
 from .parentdatapointreference import ParentDataPointReference
 
 
@@ -36,7 +36,6 @@ class ParentDataPointReferenceSet(sdRDM.DataModel):
         self,
         series_id: str,
         start_value: StartValue,
-        id: Optional[str] = None,
         end_value: Optional[EndValue] = None,
         id: Optional[str] = None,
     ) -> None:
@@ -47,14 +46,12 @@ class ParentDataPointReferenceSet(sdRDM.DataModel):
             id (str): Unique identifier of the 'ParentDataPointReference' object. Defaults to 'None'.
             series_id (): Contains the ID of the Series referenced..
             start_value (): Lower boundary of an interval or ValueSet..
-            id (): Anchor point for digital signature. This identifier is referred to from the 'Reference' element in a Signature. Unique per document.. Defaults to None
             end_value (): Upper boundary of an interval.. Defaults to None
         """
 
         params = {
             "series_id": series_id,
             "start_value": start_value,
-            "id": id,
             "end_value": end_value,
         }
 

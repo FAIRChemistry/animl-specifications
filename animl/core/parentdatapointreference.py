@@ -5,8 +5,8 @@ from pydantic import Field
 from sdRDM.base.utils import forge_signature, IDGenerator
 
 
-from .endvalue import EndValue
 from .startvalue import StartValue
+from .endvalue import EndValue
 
 
 @forge_signature
@@ -30,15 +30,6 @@ class ParentDataPointReference(sdRDM.DataModel):
         ...,
         description="Lower boundary of an interval or ValueSet.",
         xml="StartValue",
-    )
-
-    id: Optional[str] = Field(
-        default=None,
-        description=(
-            "Anchor point for digital signature. This identifier is referred to from"
-            " the 'Reference' element in a Signature. Unique per document."
-        ),
-        xml="@id",
     )
 
     end_value: Optional[EndValue] = Field(

@@ -5,9 +5,9 @@ from pydantic import Field
 from sdRDM.base.utils import forge_signature, IDGenerator
 
 
-from .encodedvalueset import EncodedValueSet
-from .autoincrementedvalueset import AutoIncrementedValueSet
 from .individualvalueset import IndividualValueSet
+from .autoincrementedvalueset import AutoIncrementedValueSet
+from .encodedvalueset import EncodedValueSet
 from .unit import Unit
 
 
@@ -47,15 +47,6 @@ class Series(sdRDM.DataModel):
         ...,
         description="Data type used by all values in this Series.",
         xml="@seriesType",
-    )
-
-    id: Optional[str] = Field(
-        default=None,
-        description=(
-            "Anchor point for digital signature. This identifier is referred to from"
-            " the 'Reference' element in a Signature. Unique per document."
-        ),
-        xml="@id",
     )
 
     visible: Optional[str] = Field(

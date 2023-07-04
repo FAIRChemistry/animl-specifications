@@ -62,24 +62,20 @@ classDiagram
     
     class SampleSet {
         +Sample[0..*] sample*
-        +string id
     }
     
     class AuditTrailEntrySet {
-        +string id
         +AuditTrailEntry[0..*] audit_trail_entry
     }
     
     class ExperimentStepSet {
         +ExperimentStep[0..*] experiment_step*
-        +string id
         +Template[0..*] template
     }
     
     class Sample {
         +string name*
         +string sample_id*
-        +string id
         +string barcode
         +string comment
         +string derived
@@ -95,7 +91,6 @@ classDiagram
         +datetime timestamp*
         +Author author*
         +string action*
-        +string id
         +Software software
         +string reason
         +string comment
@@ -106,7 +101,6 @@ classDiagram
     class Template {
         +string name*
         +string template_id*
-        +string id
         +string source_data_location
         +TagSet tag_set
         +Technique technique
@@ -118,7 +112,6 @@ classDiagram
     class ExperimentStep {
         +string name*
         +string experiment_step_id*
-        +string id
         +string template_used
         +string comment
         +string source_data_location
@@ -159,13 +152,11 @@ classDiagram
     
     class Result {
         +string name*
-        +string id
         +SeriesSet series_set
         +Category[0..*] category
     }
     
     class Method {
-        +string id
         +string name
         +Author author
         +Device device
@@ -176,13 +167,11 @@ classDiagram
     class Technique {
         +string name*
         +string uri*
-        +string id
         +string sha256
         +Extension[0..*] extension
     }
     
     class Infrastructure {
-        +string id
         +SampleReferenceSet sample_reference_set
         +ParentDataPointReferenceSet parent_data_point_reference_set
         +ExperimentDataReferenceSet experiment_data_reference_set
@@ -196,7 +185,6 @@ classDiagram
     
     class Category {
         +string name*
-        +string id
         +Parameter[0..*] parameter
         +SeriesSet[0..*] series_set
         +Category[0..*] category
@@ -217,7 +205,6 @@ classDiagram
     }
     
     class ExperimentDataReferenceSet {
-        +string id
         +ExperimentDataReference[0..*] experiment_data_reference
         +ExperimentDataBulkReference[0..*] experiment_data_bulk_reference
     }
@@ -227,7 +214,6 @@ classDiagram
     }
     
     class SampleReferenceSet {
-        +string id
         +SampleReference[0..*] sample_reference
         +SampleInheritance[0..*] sample_inheritance
     }
@@ -236,14 +222,12 @@ classDiagram
         +string name*
         +string length*
         +Series[0..*] series*
-        +string id
     }
     
     class Parameter {
         +string name*
         +string parameter_type*
         +int, float, string, bool, datetime, bytes value*
-        +string id
         +SIUnit unit
     }
     
@@ -251,20 +235,17 @@ classDiagram
         +string role*
         +string data_purpose*
         +string experiment_step_id*
-        +string id
     }
     
     class ExperimentDataBulkReference {
         +string role*
         +string data_purpose*
         +string experiment_step_id_prefix*
-        +string id
     }
     
     class ParentDataPointReference {
         +string series_id*
         +StartValue start_value*
-        +string id
         +EndValue end_value
     }
     
@@ -272,13 +253,11 @@ classDiagram
         +string sample_id*
         +string role*
         +string sample_purpose*
-        +string id
     }
     
     class SampleInheritance {
         +string role*
         +string sample_purpose*
-        +string id
     }
     
     class Series {
@@ -286,7 +265,6 @@ classDiagram
         +string dependency*
         +string series_id*
         +string series_type*
-        +string id
         +string visible
         +string plot_scale
         +IndividualValueSet, EncodedValueSet, AutoIncrementedValueSet value_set

@@ -37,19 +37,11 @@ Container for Samples used in this AnIML document.
     - Multiple: True
     - Description: Individual Sample, referenced from other parts of this AnIML document.
     - XML: Sample
-- id
-    - Type: string
-    - Description: Anchor point for digital signature. This identifier is referred to from the 'Reference' element in a Signature. Unique per document.
-    - XML: @id
 
 ### AuditTrailEntrySet
 
 Container for audit trail entries describing changes to this document.
 
-- id
-    - Type: string
-    - Description: Anchor point for digital signature. This identifier is referred to from the 'Reference' element in a Signature. Unique per document.
-    - XML: @id
 - audit_trail_entry
     - Type: [AuditTrailEntry](#AuditTrailEntry)
     - Multiple: True
@@ -65,10 +57,6 @@ Container for multiple ExperimentSteps that describe the process and results.
     - Multiple: True
     - Description: Container that documents a step in an experiment. Use one ExperimentStep per application of a Technique.
     - XML: ExperimentStep
-- id
-    - Type: string
-    - Description: Anchor point for digital signature. This identifier is referred to from the 'Reference' element in a Signature. Unique per document.
-    - XML: @id
 - template
     - Type: [Template](#Template)
     - Multiple: True
@@ -87,10 +75,6 @@ Individual Sample, referenced from other parts of this AnIML document.
     - Type: string
     - Description: None
     - XML: @sampleID
-- id
-    - Type: string
-    - Description: Anchor point for digital signature. This identifier is referred to from the 'Reference' element in a Signature. Unique per document.
-    - XML: @id
 - barcode
     - Type: string
     - Description: Value of barcode label that is attached to sample container.
@@ -145,10 +129,6 @@ Describes a set of changes made to the particular AnIML document by one user at 
     - Type: string
     - Description: Type of change made (created, modified, ...)
     - XML: Action
-- id
-    - Type: string
-    - Description: Anchor point for digital signature. This identifier is referred to from the 'Reference' element in a Signature. Unique per document.
-    - XML: @id
 - software
     - Type: [Software](#Software)
     - Description: Software used to author this.
@@ -184,10 +164,6 @@ Represents a template for an ExperimentStep.
     - Type: string
     - Description: None
     - XML: @templateID
-- id
-    - Type: string
-    - Description: Anchor point for digital signature. This identifier is referred to from the 'Reference' element in a Signature. Unique per document.
-    - XML: @id
 - source_data_location
     - Type: string
     - Description: Points to the original data source. May be a file name, uri, database ID, etc.
@@ -226,10 +202,6 @@ Container that documents a step in an experiment. Use one ExperimentStep per app
     - Type: string
     - Description: Unique identifier for this ExperimentStep. Used to point to this step from an ExperimentDataReference.
     - XML: @experimentStepID
-- id
-    - Type: string
-    - Description: Anchor point for digital signature. This identifier is referred to from the 'Reference' element in a Signature. Unique per document.
-    - XML: @id
 - template_used
     - Type: string
     - Description: None
@@ -357,10 +329,6 @@ Container for Data derived from Experiment.
     - Type: string
     - Description: Plain-text name of this item.
     - XML: @name
-- id
-    - Type: string
-    - Description: Anchor point for digital signature. This identifier is referred to from the 'Reference' element in a Signature. Unique per document.
-    - XML: @id
 - series_set
     - Type: [SeriesSet](#SeriesSet)
     - Description: Container for n-dimensional Data.
@@ -375,10 +343,6 @@ Container for Data derived from Experiment.
 
 Describes how this Experiment was performed.
 
-- id
-    - Type: string
-    - Description: Anchor point for digital signature. This identifier is referred to from the 'Reference' element in a Signature. Unique per document.
-    - XML: @id
 - name
     - Type: string
     - Description: Optional method name, as defined in the instrument software.
@@ -413,10 +377,6 @@ Reference to Technique Definition used in this Experiment.
     - Type: string
     - Description: URI where Technique Definition file can be fetched.
     - XML: @uri
-- id
-    - Type: string
-    - Description: Anchor point for digital signature. This identifier is referred to from the 'Reference' element in a Signature. Unique per document.
-    - XML: @id
 - sha256
     - Type: string
     - Description: SHA256 checksum of the referenced Technique Definition. Hex encoded, lower cased. Similar to the output of the sha256 unix command.
@@ -431,10 +391,6 @@ Reference to Technique Definition used in this Experiment.
 
 Contains references to the context of this Experiment.
 
-- id
-    - Type: string
-    - Description: Anchor point for digital signature. This identifier is referred to from the 'Reference' element in a Signature. Unique per document.
-    - XML: @id
 - sample_reference_set
     - Type: [SampleReferenceSet](#SampleReferenceSet)
     - Description: Set of Samples used in this Experiment.
@@ -473,10 +429,6 @@ Defines a category of Parameters and SeriesSets. Used to model hierarchies.
     - Type: string
     - Description: Plain-text name of this item.
     - XML: @name
-- id
-    - Type: string
-    - Description: Anchor point for digital signature. This identifier is referred to from the 'Reference' element in a Signature. Unique per document.
-    - XML: @id
 - parameter
     - Type: [Parameter](#Parameter)
     - Multiple: True
@@ -539,10 +491,6 @@ Reference to an Extension to amend the active Technique Definition.
 
 Set of Experiment Steps consumed by this Experiment Step.
 
-- id
-    - Type: string
-    - Description: Anchor point for digital signature. This identifier is referred to from the 'Reference' element in a Signature. Unique per document.
-    - XML: @id
 - experiment_data_reference
     - Type: [ExperimentDataReference](#ExperimentDataReference)
     - Multiple: True
@@ -568,10 +516,6 @@ Contains references to the parent Result.
 
 Set of Samples used in this Experiment.
 
-- id
-    - Type: string
-    - Description: Anchor point for digital signature. This identifier is referred to from the 'Reference' element in a Signature. Unique per document.
-    - XML: @id
 - sample_reference
     - Type: [SampleReference](#SampleReference)
     - Multiple: True
@@ -600,10 +544,6 @@ Container for n-dimensional Data.
     - Multiple: True
     - Description: Container for multiple Values.
     - XML: Series
-- id
-    - Type: string
-    - Description: Anchor point for digital signature. This identifier is referred to from the 'Reference' element in a Signature. Unique per document.
-    - XML: @id
 
 ### Parameter
 
@@ -621,10 +561,6 @@ Name/Value Pair.
     - Type: int, float, string, bool, datetime, bytes
     - Description: I: Individual integer value (32 bits, signed). L: Individual long integer value (64 bits, signed). F: Individual 32-bit floating point value. D: Individual 64-bit floating point value. S: Individual string value. Boolean: Individual boolean value. DateTime: Individual ISO date/time value. PNG: Base 64 encoded PNG image. EmbeddedXML: Value governed by a different XML Schema. SVG: Value governed by the SVG DTD. Used to represent vector graphic images.
     - XML: {int: I, float: F, string: S, bool: Boolean, datetime: DateTime, bytes: PNG}
-- id
-    - Type: string
-    - Description: Anchor point for digital signature. This identifier is referred to from the 'Reference' element in a Signature. Unique per document.
-    - XML: @id
 - unit
     - Type: [SIUnit](#SIUnit)
     - Description: SIUnit: Combination of SI Units used to represent Scientific unit
@@ -646,10 +582,6 @@ Reference to an Experiment Step whose data is consumed.
     - Type: string
     - Description: None
     - XML: @experimentStepID
-- id
-    - Type: string
-    - Description: Anchor point for digital signature. This identifier is referred to from the 'Reference' element in a Signature. Unique per document.
-    - XML: @id
 
 ### ExperimentDataBulkReference
 
@@ -667,10 +599,6 @@ Prefix-based reference to a set of Experiment Steps whose data are consumed.
     - Type: string
     - Description: None
     - XML: @experimentStepIDPrefix
-- id
-    - Type: string
-    - Description: Anchor point for digital signature. This identifier is referred to from the 'Reference' element in a Signature. Unique per document.
-    - XML: @id
 
 ### ParentDataPointReference
 
@@ -684,10 +612,6 @@ Reference to a data point or value range in an independent Series in the parent 
     - Type: [StartValue](#StartValue)
     - Description: Lower boundary of an interval or ValueSet.
     - XML: StartValue
-- id
-    - Type: string
-    - Description: Anchor point for digital signature. This identifier is referred to from the 'Reference' element in a Signature. Unique per document.
-    - XML: @id
 - end_value
     - Type: [EndValue](#EndValue)
     - Description: Upper boundary of an interval.
@@ -709,10 +633,6 @@ Reference to a Sample used in this Experiment.
     - Type: string
     - Description: Specifies whether the referenced sample is produced or consumed by the current ExperimentStep.
     - XML: @samplePurpose
-- id
-    - Type: string
-    - Description: Anchor point for digital signature. This identifier is referred to from the 'Reference' element in a Signature. Unique per document.
-    - XML: @id
 
 ### SampleInheritance
 
@@ -726,10 +646,6 @@ Indicates that a Sample was inherited from the parent ExperimentStep.
     - Type: string
     - Description: Specifies whether the referenced sample is produced or consumed by the current ExperimentStep.
     - XML: @samplePurpose
-- id
-    - Type: string
-    - Description: Anchor point for digital signature. This identifier is referred to from the 'Reference' element in a Signature. Unique per document.
-    - XML: @id
 
 ### Series
 
@@ -751,10 +667,6 @@ Container for multiple Values.
     - Type: string
     - Description: Data type used by all values in this Series.
     - XML: @seriesType
-- id
-    - Type: string
-    - Description: Anchor point for digital signature. This identifier is referred to from the 'Reference' element in a Signature. Unique per document.
-    - XML: @id
 - visible
     - Type: string
     - Description: Specifies whether data in this Series is to be displayed to the user by default.

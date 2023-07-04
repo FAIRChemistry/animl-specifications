@@ -7,9 +7,9 @@ from sdRDM.base.utils import forge_signature, IDGenerator
 
 from datetime import datetime as Datetime
 
+from .software import Software
 from .diff import Diff
 from .author import Author
-from .software import Software
 
 
 @forge_signature
@@ -42,15 +42,6 @@ class AuditTrailEntry(sdRDM.DataModel):
         ...,
         description="Type of change made (created, modified, ...)",
         xml="Action",
-    )
-
-    id: Optional[str] = Field(
-        default=None,
-        description=(
-            "Anchor point for digital signature. This identifier is referred to from"
-            " the 'Reference' element in a Signature. Unique per document."
-        ),
-        xml="@id",
     )
 
     software: Optional[Software] = Field(

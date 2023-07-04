@@ -7,8 +7,8 @@ from sdRDM.base.utils import forge_signature, IDGenerator
 
 
 from .sample import Sample
-from .tagset import TagSet
 from .category import Category
+from .tagset import TagSet
 
 
 @forge_signature
@@ -31,20 +31,10 @@ class SampleSet(sdRDM.DataModel):
         default_factory=ListPlus,
     )
 
-    id: Optional[str] = Field(
-        default=None,
-        description=(
-            "Anchor point for digital signature. This identifier is referred to from"
-            " the 'Reference' element in a Signature. Unique per document."
-        ),
-        xml="@id",
-    )
-
     def add_to_sample(
         self,
         name: str,
         sample_id: str,
-        id: Optional[str] = None,
         barcode: Optional[str] = None,
         comment: Optional[str] = None,
         derived: Optional[str] = None,
@@ -63,7 +53,6 @@ class SampleSet(sdRDM.DataModel):
             id (str): Unique identifier of the 'Sample' object. Defaults to 'None'.
             name (): Plain-text name of this item..
             sample_id (): None.
-            id (): Anchor point for digital signature. This identifier is referred to from the 'Reference' element in a Signature. Unique per document.. Defaults to None
             barcode (): Value of barcode label that is attached to sample container.. Defaults to None
             comment (): Unstructured text comment to further describe the Sample.. Defaults to None
             derived (): Indicates whether this is a derived Sample. A derived Sample is a Sample that has been created by applying a Technique. (Sub-Sampling, Processing, ...). Defaults to None
@@ -78,7 +67,6 @@ class SampleSet(sdRDM.DataModel):
         params = {
             "name": name,
             "sample_id": sample_id,
-            "id": id,
             "barcode": barcode,
             "comment": comment,
             "derived": derived,
