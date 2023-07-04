@@ -6,8 +6,8 @@ from sdRDM.base.listplus import ListPlus
 from sdRDM.base.utils import forge_signature, IDGenerator
 
 
-from .experimentdatabulkreference import ExperimentDataBulkReference
 from .experimentdatareference import ExperimentDataReference
+from .experimentdatabulkreference import ExperimentDataBulkReference
 
 
 @forge_signature

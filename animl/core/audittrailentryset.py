@@ -7,10 +7,10 @@ from sdRDM.base.utils import forge_signature, IDGenerator
 
 from datetime import datetime as Datetime
 
-from .audittrailentry import AuditTrailEntry
-from .software import Software
 from .diff import Diff
 from .author import Author
+from .software import Software
+from .audittrailentry import AuditTrailEntry
 
 
 @forge_signature

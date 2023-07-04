@@ -7,9 +7,9 @@ from sdRDM.base.utils import forge_signature, IDGenerator
 
 from datetime import datetime as Datetime
 
-from .software import Software
 from .diff import Diff
 from .author import Author
+from .software import Software
 
 
 @forge_signature

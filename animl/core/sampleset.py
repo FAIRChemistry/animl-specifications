@@ -6,9 +6,9 @@ from sdRDM.base.listplus import ListPlus
 from sdRDM.base.utils import forge_signature, IDGenerator
 
 
+from .tagset import TagSet
 from .sample import Sample
 from .category import Category
-from .tagset import TagSet
 
 
 @forge_signature

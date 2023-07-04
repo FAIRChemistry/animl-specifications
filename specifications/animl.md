@@ -440,7 +440,8 @@ Defines a category of Parameters and SeriesSets. Used to model hierarchies.
     - Description: Container for n-dimensional Data.
     - XML: SeriesSet
 - category
-    - Type: [Category](#Category)
+    - Type: string
+    - Default: !!This is currently a placeholder, Type does not reflect final type!!
     - Multiple: True
     - Description: Defines a category of Parameters and SeriesSets. Used to model hierarchies.
     - XML: Category

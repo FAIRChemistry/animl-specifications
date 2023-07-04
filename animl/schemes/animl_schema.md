@@ -33,7 +33,6 @@ classDiagram
     Infrastructure *-- ExperimentDataReferenceSet
     Infrastructure *-- ParentDataPointReferenceSet
     Infrastructure *-- SampleReferenceSet
-    Category *-- Category
     Category *-- SeriesSet
     Category *-- Parameter
     ExperimentDataReferenceSet *-- ExperimentDataReference
@@ -187,7 +186,7 @@ classDiagram
         +string name*
         +Parameter[0..*] parameter
         +SeriesSet[0..*] series_set
-        +Category[0..*] category
+        +string[0..*] category
     }
     
     class Device {

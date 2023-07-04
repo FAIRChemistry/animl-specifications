@@ -6,13 +6,13 @@ from sdRDM.base.listplus import ListPlus
 from sdRDM.base.utils import forge_signature, IDGenerator
 
 
-from .result import Result
-from .technique import Technique
-from .experimentstep import ExperimentStep
-from .tagset import TagSet
-from .infrastructure import Infrastructure
 from .method import Method
+from .tagset import TagSet
 from .template import Template
+from .experimentstep import ExperimentStep
+from .infrastructure import Infrastructure
+from .technique import Technique
+from .result import Result
 
 
 @forge_signature
