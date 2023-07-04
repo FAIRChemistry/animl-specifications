@@ -5,5 +5,9 @@ import sdRDM
 
 
 if __name__ == "__main__":
-    lib = sdRDM.DataModel.from_markdown("specifications/animl.md")
-    lib.generate_linking_template()
+    lib = sdRDM.DataModel.from_git(
+        url="https://github.com/FAIRChemistry/animl-specifications",
+        tag="no-category-nesting",
+    )
+    animl = lib.AnIML()
+    animl.generate_linking_template()
