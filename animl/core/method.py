@@ -6,12 +6,12 @@ from sdRDM.base.listplus import ListPlus
 from sdRDM.base.utils import forge_signature, IDGenerator
 
 
-from .device import Device
-from .category import Category
-from .seriesset import SeriesSet
-from .author import Author
-from .parameter import Parameter
 from .software import Software
+from .category import Category
+from .author import Author
+from .seriesset import SeriesSet
+from .device import Device
+from .parameter import Parameter
 
 
 @forge_signature

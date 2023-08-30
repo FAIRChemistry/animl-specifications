@@ -7,8 +7,8 @@ from sdRDM.base.utils import forge_signature, IDGenerator
 from datetime import datetime as Datetime
 
 from .samplereferenceset import SampleReferenceSet
-from .parentdatapointreferenceset import ParentDataPointReferenceSet
 from .experimentdatareferenceset import ExperimentDataReferenceSet
+from .parentdatapointreferenceset import ParentDataPointReferenceSet
 
 
 @forge_signature
@@ -23,7 +23,7 @@ class Infrastructure(sdRDM.DataModel):
     )
 
     sample_reference_set: Optional[SampleReferenceSet] = Field(
-        default=None,
+        default=SampleReferenceSet(),
         description="Set of Samples used in this Experiment.",
         xml="SampleReferenceSet",
     )
@@ -35,7 +35,7 @@ class Infrastructure(sdRDM.DataModel):
     )
 
     experiment_data_reference_set: Optional[ExperimentDataReferenceSet] = Field(
-        default=None,
+        default=ExperimentDataReferenceSet(),
         description="Set of Experiment Steps consumed by this Experiment Step.",
         xml="ExperimentDataReferenceSet",
     )

@@ -6,8 +6,8 @@ from sdRDM.base.listplus import ListPlus
 from sdRDM.base.utils import forge_signature, IDGenerator
 
 
-from .parameter import Parameter
 from .category import Category
+from .parameter import Parameter
 from .seriesset import SeriesSet
 
 

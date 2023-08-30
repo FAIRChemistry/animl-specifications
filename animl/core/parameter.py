@@ -6,7 +6,7 @@ from sdRDM.base.utils import forge_signature, IDGenerator
 
 from datetime import datetime as Datetime
 
-from .siunit import SIUnit
+from .unit import Unit
 
 
 @forge_signature
@@ -43,14 +43,11 @@ class Parameter(sdRDM.DataModel):
             " different XML Schema. SVG: Value governed by the SVG DTD. Used to"
             " represent vector graphic images."
         ),
-        xml=(
-            "{int: I, float: F, string: S, bool: Boolean, datetime: DateTime, bytes:"
-            " PNG}"
-        ),
+        xml="{int: I, float: F, str: S, bool: Boolean, datetime: DateTime, bytes: PNG}",
     )
 
-    unit: Optional[SIUnit] = Field(
+    unit: Optional[Unit] = Field(
         default=None,
-        description="SIUnit: Combination of SI Units used to represent Scientific unit",
-        xml="SIUnit: SIUnit",
+        description="Unit: Definition of a Scientific Unit.",
+        xml="Unit: Unit",
     )

@@ -7,8 +7,8 @@ from sdRDM.base.utils import forge_signature, IDGenerator
 
 
 from .startvalue import StartValue
-from .endvalue import EndValue
 from .parentdatapointreference import ParentDataPointReference
+from .endvalue import EndValue
 
 
 @forge_signature

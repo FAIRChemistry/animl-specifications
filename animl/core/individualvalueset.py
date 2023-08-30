@@ -19,7 +19,7 @@ class IndividualValueSet(sdRDM.DataModel):
         xml="@id",
     )
 
-    values: List[Union[int, float, str, bool, Datetime, bytes]] = Field(
+    values: List[Union[float, int, str, bool, Datetime, bytes]] = Field(
         multiple=True,
         description=(
             "I: Individual integer value (32 bits, signed). L: Individual long integer"
@@ -30,10 +30,7 @@ class IndividualValueSet(sdRDM.DataModel):
             " different XML Schema. SVG: Value governed by the SVG DTD. Used to"
             " represent vector graphic images."
         ),
-        xml=(
-            "{int: I, float: F, string: S, bool: Boolean, datetime: DateTime, bytes:"
-            " PNG}"
-        ),
+        xml="{int: I, float: F, str: S, bool: Boolean, datetime: DateTime, bytes: PNG}",
         default_factory=ListPlus,
     )
 

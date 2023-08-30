@@ -7,9 +7,9 @@ from sdRDM.base.utils import forge_signature, IDGenerator
 
 
 from .category import Category
+from .tagset import TagSet
 from .seriesset import SeriesSet
 from .parameter import Parameter
-from .tagset import TagSet
 
 
 @forge_signature
@@ -94,7 +94,7 @@ class Sample(sdRDM.DataModel):
     )
 
     tag_set: Optional[TagSet] = Field(
-        default=None,
+        default=TagSet(),
         description="Set of Tag elements.",
         xml="TagSet",
     )

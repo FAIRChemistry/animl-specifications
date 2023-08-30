@@ -7,11 +7,10 @@ from sdRDM.base.utils import forge_signature, IDGenerator
 
 from datetime import datetime as Datetime
 
-from .parameter import Parameter
-from .category import Category
-from .siunit import SIUnit
-from .seriesset import SeriesSet
 from .series import Series
+from .unit import Unit
+from .parameter import Parameter
+from .seriesset import SeriesSet
 
 
 @forge_signature
@@ -45,7 +44,7 @@ class Category(sdRDM.DataModel):
         xml="SeriesSet",
     )
 
-    category: List[Category] = Field(
+    category: List["Category"] = Field(
         default_factory=ListPlus,
         multiple=True,
         description=(
@@ -60,7 +59,7 @@ class Category(sdRDM.DataModel):
         name: str,
         parameter_type: str,
         value: Union[int, float, str, bool, Datetime, bytes],
-        unit: Optional[SIUnit] = None,
+        unit: Optional[Unit] = None,
         id: Optional[str] = None,
     ) -> None:
         """
@@ -71,7 +70,7 @@ class Category(sdRDM.DataModel):
             name (): Plain-text name of this item..
             parameter_type (): Data type of this parameter.
             value (): I: Individual integer value (32 bits, signed). L: Individual long integer value (64 bits, signed). F: Individual 32-bit floating point value. D: Individual 64-bit floating point value. S: Individual string value. Boolean: Individual boolean value. DateTime: Individual ISO date/time value. PNG: Base 64 encoded PNG image. EmbeddedXML: Value governed by a different XML Schema. SVG: Value governed by the SVG DTD. Used to represent vector graphic images..
-            unit (): SIUnit: Combination of SI Units used to represent Scientific unit. Defaults to None
+            unit (): Unit: Definition of a Scientific Unit.. Defaults to None
         """
 
         params = {
@@ -123,7 +122,7 @@ class Category(sdRDM.DataModel):
         name: str,
         parameter: List[Parameter] = ListPlus(),
         series_set: List[SeriesSet] = ListPlus(),
-        category: List[Category] = ListPlus(),
+        category: List["Category"] = ListPlus(),
         id: Optional[str] = None,
     ) -> None:
         """

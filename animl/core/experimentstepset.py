@@ -6,13 +6,13 @@ from sdRDM.base.listplus import ListPlus
 from sdRDM.base.utils import forge_signature, IDGenerator
 
 
-from .result import Result
-from .technique import Technique
+from .template import Template
+from .method import Method
 from .experimentstep import ExperimentStep
 from .tagset import TagSet
+from .result import Result
+from .technique import Technique
 from .infrastructure import Infrastructure
-from .method import Method
-from .template import Template
 
 
 @forge_signature
@@ -27,13 +27,13 @@ class ExperimentStepSet(sdRDM.DataModel):
     )
 
     experiment_step: List[ExperimentStep] = Field(
+        default_factory=ListPlus,
         multiple=True,
         description=(
             "Container that documents a step in an experiment. Use one ExperimentStep"
             " per application of a Technique."
         ),
         xml="ExperimentStep",
-        default_factory=ListPlus,
     )
 
     template: List[Template] = Field(

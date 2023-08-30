@@ -5,8 +5,8 @@ from pydantic import Field
 from sdRDM.base.utils import forge_signature, IDGenerator
 
 
-from .startvalue import StartValue
 from .increment import Increment
+from .startvalue import StartValue
 
 
 @forge_signature

@@ -6,8 +6,8 @@ from sdRDM.base.listplus import ListPlus
 from sdRDM.base.utils import forge_signature, IDGenerator
 
 
-from .samplereference import SampleReference
 from .sampleinheritance import SampleInheritance
+from .samplereference import SampleReference
 
 
 @forge_signature
