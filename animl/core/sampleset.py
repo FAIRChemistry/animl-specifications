@@ -6,9 +6,9 @@ from sdRDM.base.listplus import ListPlus
 from sdRDM.base.utils import forge_signature, IDGenerator
 
 
-from .tagset import TagSet
-from .sample import Sample
 from .category import Category
+from .sample import Sample
+from .tagset import TagSet
 
 
 @forge_signature
@@ -23,12 +23,12 @@ class SampleSet(sdRDM.DataModel):
     )
 
     sample: List[Sample] = Field(
+        default_factory=ListPlus,
         multiple=True,
         description=(
             "Individual Sample, referenced from other parts of this AnIML document."
         ),
         xml="Sample",
-        default_factory=ListPlus,
     )
 
     def add_to_sample(

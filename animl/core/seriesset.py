@@ -6,11 +6,11 @@ from sdRDM.base.listplus import ListPlus
 from sdRDM.base.utils import forge_signature, IDGenerator
 
 
-from .unit import Unit
 from .series import Series
+from .unit import Unit
+from .encodedvalueset import EncodedValueSet
 from .autoincrementedvalueset import AutoIncrementedValueSet
 from .individualvalueset import IndividualValueSet
-from .encodedvalueset import EncodedValueSet
 
 
 @forge_signature

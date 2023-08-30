@@ -6,9 +6,9 @@ from sdRDM.base.listplus import ListPlus
 from sdRDM.base.utils import forge_signature, IDGenerator
 
 
+from .startvalue import StartValue
 from .parentdatapointreference import ParentDataPointReference
 from .endvalue import EndValue
-from .startvalue import StartValue
 
 
 @forge_signature

@@ -33,6 +33,7 @@ classDiagram
     Infrastructure *-- ExperimentDataReferenceSet
     Infrastructure *-- ParentDataPointReferenceSet
     Infrastructure *-- SampleReferenceSet
+    Category *-- Category
     Category *-- SeriesSet
     Category *-- Parameter
     ExperimentDataReferenceSet *-- ExperimentDataReference
@@ -41,7 +42,7 @@ classDiagram
     SampleReferenceSet *-- SampleReference
     SampleReferenceSet *-- SampleInheritance
     SeriesSet *-- Series
-    Parameter *-- SIUnit
+    Parameter *-- Unit
     ParentDataPointReference *-- EndValue
     ParentDataPointReference *-- StartValue
     Series *-- IndividualValueSet
@@ -60,7 +61,7 @@ classDiagram
     }
     
     class SampleSet {
-        +Sample[0..*] sample*
+        +Sample[0..*] sample
     }
     
     class AuditTrailEntrySet {
@@ -68,7 +69,7 @@ classDiagram
     }
     
     class ExperimentStepSet {
-        +ExperimentStep[0..*] experiment_step*
+        +ExperimentStep[0..*] experiment_step
         +Template[0..*] template
     }
     
@@ -186,7 +187,7 @@ classDiagram
         +string name*
         +Parameter[0..*] parameter
         +SeriesSet[0..*] series_set
-        +string[0..*] category
+        +Category[0..*] category
     }
     
     class Device {
@@ -227,7 +228,7 @@ classDiagram
         +string name*
         +string parameter_type*
         +int, float, string, bool, datetime, bytes value*
-        +SIUnit unit
+        +Unit unit
     }
     
     class ExperimentDataReference {
@@ -281,7 +282,7 @@ classDiagram
     }
     
     class IndividualValueSet {
-        +int, float, string, bool, datetime, bytes[0..*] values*
+        +float, int, string, bool, datetime, bytes[0..*] values*
         +string start_index
         +string end_index
     }

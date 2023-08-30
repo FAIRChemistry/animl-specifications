@@ -7,8 +7,8 @@ from sdRDM.base.utils import forge_signature, IDGenerator
 
 
 from .category import Category
-from .seriesset import SeriesSet
 from .parameter import Parameter
+from .seriesset import SeriesSet
 
 
 @forge_signature
@@ -49,7 +49,7 @@ class Result(sdRDM.DataModel):
         name: str,
         parameter: List[Parameter] = ListPlus(),
         series_set: List[SeriesSet] = ListPlus(),
-        category: List[str] = ListPlus(),
+        category: List[Category] = ListPlus(),
         id: Optional[str] = None,
     ) -> None:
         """

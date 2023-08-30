@@ -7,10 +7,10 @@ from sdRDM.base.utils import forge_signature, IDGenerator
 
 from datetime import datetime as Datetime
 
-from .siunit import SIUnit
 from .series import Series
-from .seriesset import SeriesSet
+from .unit import Unit
 from .parameter import Parameter
+from .seriesset import SeriesSet
 
 
 @forge_signature
@@ -44,7 +44,7 @@ class Category(sdRDM.DataModel):
         xml="SeriesSet",
     )
 
-    category: List[str] = Field(
+    category: List["Category"] = Field(
         default_factory=ListPlus,
         multiple=True,
         description=(
@@ -59,7 +59,7 @@ class Category(sdRDM.DataModel):
         name: str,
         parameter_type: str,
         value: Union[int, float, str, bool, Datetime, bytes],
-        unit: Optional[SIUnit] = None,
+        unit: Optional[Unit] = None,
         id: Optional[str] = None,
     ) -> None:
         """
@@ -70,7 +70,7 @@ class Category(sdRDM.DataModel):
             name (): Plain-text name of this item..
             parameter_type (): Data type of this parameter.
             value (): I: Individual integer value (32 bits, signed). L: Individual long integer value (64 bits, signed). F: Individual 32-bit floating point value. D: Individual 64-bit floating point value. S: Individual string value. Boolean: Individual boolean value. DateTime: Individual ISO date/time value. PNG: Base 64 encoded PNG image. EmbeddedXML: Value governed by a different XML Schema. SVG: Value governed by the SVG DTD. Used to represent vector graphic images..
-            unit (): SIUnit: Combination of SI Units used to represent Scientific unit. Defaults to None
+            unit (): Unit: Definition of a Scientific Unit.. Defaults to None
         """
 
         params = {
@@ -116,3 +116,36 @@ class Category(sdRDM.DataModel):
         self.series_set.append(SeriesSet(**params))
 
         return self.series_set[-1]
+
+    def add_to_category(
+        self,
+        name: str,
+        parameter: List[Parameter] = ListPlus(),
+        series_set: List[SeriesSet] = ListPlus(),
+        category: List["Category"] = ListPlus(),
+        id: Optional[str] = None,
+    ) -> None:
+        """
+        This method adds an object of type 'Category' to attribute category
+
+        Args:
+            id (str): Unique identifier of the 'Category' object. Defaults to 'None'.
+            name (): Plain-text name of this item..
+            parameter (): Name/Value Pair.. Defaults to ListPlus()
+            series_set (): Container for n-dimensional Data.. Defaults to ListPlus()
+            category (): Defines a category of Parameters and SeriesSets. Used to model hierarchies.. Defaults to ListPlus()
+        """
+
+        params = {
+            "name": name,
+            "parameter": parameter,
+            "series_set": series_set,
+            "category": category,
+        }
+
+        if id is not None:
+            params["id"] = id
+
+        self.category.append(Category(**params))
+
+        return self.category[-1]

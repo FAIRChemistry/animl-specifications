@@ -6,13 +6,13 @@ from sdRDM.base.listplus import ListPlus
 from sdRDM.base.utils import forge_signature, IDGenerator
 
 
+from .category import Category
 from .method import Method
 from .tagset import TagSet
 from .seriesset import SeriesSet
-from .infrastructure import Infrastructure
-from .technique import Technique
-from .category import Category
 from .result import Result
+from .technique import Technique
+from .infrastructure import Infrastructure
 
 
 @forge_signature
@@ -48,7 +48,7 @@ class Template(sdRDM.DataModel):
     )
 
     tag_set: Optional[TagSet] = Field(
-        default=None,
+        default=TagSet(),
         description="Set of Tag elements.",
         xml="TagSet",
     )
@@ -60,13 +60,13 @@ class Template(sdRDM.DataModel):
     )
 
     infrastructure: Optional[Infrastructure] = Field(
-        default=None,
+        default=Infrastructure(),
         description="Contains references to the context of this Experiment.",
         xml="Infrastructure",
     )
 
     method: Optional[Method] = Field(
-        default=None,
+        default=Method(),
         description="Describes how this Experiment was performed.",
         xml="Method",
     )

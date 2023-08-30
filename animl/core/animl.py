@@ -5,9 +5,9 @@ from pydantic import Field
 from sdRDM.base.utils import forge_signature, IDGenerator
 
 
+from .experimentstepset import ExperimentStepSet
 from .sampleset import SampleSet
 from .audittrailentryset import AuditTrailEntrySet
-from .experimentstepset import ExperimentStepSet
 
 
 @forge_signature
@@ -31,13 +31,13 @@ class AnIML(sdRDM.DataModel):
     )
 
     sample_set: Optional[SampleSet] = Field(
-        default=None,
+        default=SampleSet(),
         description="Container for Samples used in this AnIML document.",
         xml="SampleSet",
     )
 
     experiment_step_set: Optional[ExperimentStepSet] = Field(
-        default=None,
+        default=ExperimentStepSet(),
         description=(
             "Container for multiple ExperimentSteps that describe the process and"
             " results."
@@ -46,7 +46,7 @@ class AnIML(sdRDM.DataModel):
     )
 
     audit_trail_entry_set: Optional[AuditTrailEntrySet] = Field(
-        default=None,
+        default=AuditTrailEntrySet(),
         description=(
             "Container for audit trail entries describing changes to this document."
         ),
