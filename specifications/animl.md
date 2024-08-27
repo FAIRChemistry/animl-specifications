@@ -1,3 +1,7 @@
+---
+repo: "https://www.github.com/FAIRChemistry/animl-specifications"
+--- 
+
 # Analytical Information Markup Language
 
 An AnIML file (also called an instance in XML speak) is an XML representation of a piece of analytical data gathered from an instrument. The format of AnIML files is structured based off of a set of rules - a schema file (see 'Core Schema'). The schema dictates the elements (tags) allowed in the file, the data type of the information in the elements, and even (if required) what values are allowed within an element. If an AnIML file is written in accordance with the published schema it is said to be 'a valid instance file'.
@@ -116,7 +120,7 @@ Individual Sample, referenced from other parts of this AnIML document.
 Describes a set of changes made to the particular AnIML document by one user at a given time.
 
 - __timestamp__
-  - Type: datetime
+  - Type: string
   - Description: Date and time of modification.
   - XML: Timestamp
 - __author__
@@ -402,7 +406,7 @@ Contains references to the context of this Experiment.
   - Description: Set of Experiment Steps consumed by this Experiment Step.
   - XML: ExperimentDataReferenceSet
 - timestamp
-  - Type: datetime
+  - Type: string
   - Description: Date and time of modification.
   - XML: Timestamp
 
@@ -556,9 +560,8 @@ Name/Value Pair.
   - Description: Data type of this parameter
   - XML: @parameterType
 - __value__
-  - Type: int, float, string, bool, datetime, bytes
-  - Description: I: Individual integer value (32 bits, signed). L: Individual long integer value (64 bits, signed). F: Individual 32-bit floating point value. D: Individual 64-bit floating point value. S: Individual string value. Boolean: Individual boolean value. DateTime: Individual ISO date/time value. PNG: Base 64 encoded PNG image. EmbeddedXML: Value governed by a different XML Schema. SVG: Value governed by the SVG DTD. Used to represent vector graphic images.
-  - XML: {int: I, float: F, str: S, bool: Boolean, datetime: DateTime, bytes: PNG}
+  - Type: Entry[](#entry)
+  - Description: I: Individual integer value (32 bits, signed). L: Individual long integer value (64 bits, signed). F: Individual 32-bit floating point value. D: Individual 64-bit floating point value. S: Individual string value. Boolean: Individual boolean value. string: Individual ISO date/time value. PNG: Base 64 encoded PNG image. EmbeddedXML: Value governed by a different XML Schema. SVG: Value governed by the SVG DTD. Used to represent vector graphic images.
 - unit
   - Type: [Unit](#Unit)
   - Description: Unit: Definition of a Scientific Unit.
@@ -674,9 +677,8 @@ Container for multiple Values.
   - Description: Specifies whether the data in this Series is typically plotted on a linear or logarithmic scale.
   - XML: @plotScale
 - value_set
-  - Type: IndividualValueSet, EncodedValueSet, AutoIncrementedValueSet
+  - Type: [SetEntry](#SetEntry)
   - Description: IndividualValueSet: Multiple Values explicitly specified. EncodedValueSet: Multiple numeric values encoded as a base64 binary string. Uses little-endian byte order. AutoIncrementedValueSet: Multiple values given in form of a start value and an increment.
-  - XML: {IndividualValueSet: IndividualValueSet, EncodedValueSet: EncodedValueSet, AutoIncrementedValueSet: AutoIncrementedValueSet}
 - unit
   - Type: [Unit](#Unit)
   - Description: Definition of a Scientific Unit.
@@ -704,19 +706,17 @@ Combination of SI Units used to represent Scientific unit
 Upper boundary of an interval.
 
 - __value__
-  - Type: int, float
+  - Type: Entry[](#entry)
   - Description: I: Individual integer value (32 bits, signed). L: Individual long integer value (64 bits, signed). F: Individual 32-bit floating point value. D: Individual 64-bit floating point value.
-  - XML: {int: I, float: F}
 
 ### IndividualValueSet
 
 Multiple Values explicitly specified.
 
 - __values__
-  - Type: float, int, string, bool, datetime, bytes
+  - Type: Entry[](#entry)
   - Multiple: True
-  - Description: I: Individual integer value (32 bits, signed). L: Individual long integer value (64 bits, signed). F: Individual 32-bit floating point value. D: Individual 64-bit floating point value. S: Individual string value. Boolean: Individual boolean value. DateTime: Individual ISO date/time value. PNG: Base 64 encoded PNG image. EmbeddedXML: Value governed by a different XML Schema. SVG: Value governed by the SVG DTD. Used to represent vector graphic images.
-  - XML: {int: I, float: F, str: S, bool: Boolean, datetime: DateTime, bytes: PNG}
+  - Description: I: Individual integer value (32 bits, signed). L: Individual long integer value (64 bits, signed). F: Individual 32-bit floating point value. D: Individual 64-bit floating point value. S: Individual string value. Boolean: Individual boolean value. string: Individual ISO date/time value. PNG: Base 64 encoded PNG image. EmbeddedXML: Value governed by a different XML Schema. SVG: Value governed by the SVG DTD. Used to represent vector graphic images.
 - start_index
   - Type: string
   - Description: Zero-based index of the first entry in this Value Set. The specification is inclusive.
@@ -783,16 +783,53 @@ Multiple numeric values encoded as a base64 binary string. Uses little-endian by
 Lower boundary of an interval or ValueSet.
 
 - __value__
-  - Type: int, float
+  - Type: Entry[](#entry)
   - Description: I: Individual integer value (32 bits, signed). L: Individual long integer value (64 bits, signed). F: Individual 32-bit floating point value. D: Individual 64-bit floating point value.
-  - XML: {int: I, float: F}
 
 ### Increment
 
 Increment value
 
 - __value__
-  - Type: int, float
+  - Type: Entry[](#entry)
   - Description: I: Individual integer value (32 bits, signed). L: Individual long integer value (64 bits, signed). F: Individual 32-bit floating point value. D: Individual 64-bit floating point value.
-  - XML: {int: I, float: F}
  
+ ### Entry
+
+ Custom type to represent a value in a parameter
+
+- integer
+  - Type: integer
+  - XML: I
+- float
+  - Type: float
+  - XML: F
+- str
+  - Type: string
+  - XML: S
+- string
+  - Type: string
+  - XML: string
+- bool
+  - Type: boolean
+  - XML: Boolean
+- png
+  - Type: string
+  - XML: PNG
+svg
+  - Type: string
+  - XML: SVG
+
+### SetEntry
+
+Custom type to represent value in a series
+
+- individual_value_set
+  - Type: [IndividualValueSet](#IndividualValueSet)
+  - XML: IndividualValueSet
+- encoded_value_set
+  - Type: [EncodedValueSet](#EncodedValueSet)
+  - XML: EncodedValueSet
+- auto_incremented_value_set
+  - Type: [AutoIncrementedValueSet](#AutoIncrementedValueSet)
+  - XML: AutoIncrementedValueSet
