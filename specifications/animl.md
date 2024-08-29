@@ -798,25 +798,25 @@ Increment value
 
  Custom type to represent a value in a parameter
 
-- integer
+- an_integer
   - Type: integer
   - XML: I
-- float
+- a_floating_point
   - Type: float
   - XML: F
-- str
+- a_string
   - Type: string
   - XML: S
-- string
+- a_date_string
   - Type: string
   - XML: string
-- bool
+- a_boolean
   - Type: boolean
   - XML: Boolean
-- png
+- a_png
   - Type: string
   - XML: PNG
-svg
+- an_svg
   - Type: string
   - XML: SVG
 
@@ -824,12 +824,12 @@ svg
 
 Custom type to represent value in a series
 
-- individual_value_set
+- an_individual_value_set
   - Type: [IndividualValueSet](#IndividualValueSet)
   - XML: IndividualValueSet
-- encoded_value_set
+- an_encoded_value_set
   - Type: [EncodedValueSet](#EncodedValueSet)
   - XML: EncodedValueSet
-- auto_incremented_value_set
+- an_auto_incremented_value_set
   - Type: [AutoIncrementedValueSet](#AutoIncrementedValueSet)
   - XML: AutoIncrementedValueSet

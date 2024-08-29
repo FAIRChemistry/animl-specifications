@@ -3843,12 +3843,13 @@ class Entry(BaseModel):
         validate_assigment = True,
     ) # type: ignore
 
-    integer: Optional[int] = Field(default=None)
-    float: Optional[float] = Field(default=None)
-    str: Optional[str] = Field(default=None)
-    string: Optional[str] = Field(default=None)
-    bool: Optional[bool] = Field(default=None)
-    png: Optional[str] = Field(default=None)
+    an_integer: Optional[int] = Field(default=None)
+    a_floating_point: Optional[float] = Field(default=None)
+    a_string: Optional[str] = Field(default=None)
+    a_date_string: Optional[str] = Field(default=None)
+    a_boolean: Optional[bool] = Field(default=None)
+    a_png: Optional[str] = Field(default=None)
+    an_svg: Optional[str] = Field(default=None)
 
     # JSON-LD fields
     ld_id: str = Field(
@@ -3942,9 +3943,9 @@ class SetEntry(BaseModel):
         validate_assigment = True,
     ) # type: ignore
 
-    individual_value_set: Optional[IndividualValueSet] = Field(default=None)
-    encoded_value_set: Optional[EncodedValueSet] = Field(default=None)
-    auto_incremented_value_set: Optional[AutoIncrementedValueSet] = Field(default=None)
+    an_individual_value_set: Optional[IndividualValueSet] = Field(default=None)
+    an_encoded_value_set: Optional[EncodedValueSet] = Field(default=None)
+    an_auto_incremented_value_set: Optional[AutoIncrementedValueSet] = Field(default=None)
 
     # JSON-LD fields
     ld_id: str = Field(
