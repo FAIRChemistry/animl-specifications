@@ -4059,7 +4059,7 @@ class IndividualValueSet(BaseModel):
         validate_assigment = True,
     ) # type: ignore
 
-    values: Entry
+    values: list[Entry] = Field(default_factory=list)
     start_index: Optional[str] = Field(default=None)
     end_index: Optional[str] = Field(default=None)
 
@@ -4080,6 +4080,18 @@ class IndividualValueSet(BaseModel):
             "md": "https://www.github.com/FAIRChemistry/animl-specifications",
         }
     )
+
+    def filter_values(self, **kwargs) -> list[Entry]:
+        """Filters the values attribute based on the given kwargs
+
+        Args:
+            **kwargs: The attributes to filter by.
+
+        Returns:
+            list[Entry]: The filtered list of Entry objects
+        """
+
+        return FilterWrapper[Entry](self.values, **kwargs).filter()
 
 
     def set_attr_term(
@@ -4147,6 +4159,37 @@ class IndividualValueSet(BaseModel):
 
         add_namespace(self, prefix, iri)
         self.ld_type.append(term)
+
+
+    def add_to_values(
+        self,
+        an_integer: Optional[int]= None,
+        a_floating_point: Optional[float]= None,
+        a_string: Optional[str]= None,
+        a_date_string: Optional[str]= None,
+        a_boolean: Optional[bool]= None,
+        a_png: Optional[str]= None,
+        an_svg: Optional[str]= None,
+        **kwargs,
+    ):
+        params = {
+            "an_integer": an_integer,
+            "a_floating_point": a_floating_point,
+            "a_string": a_string,
+            "a_date_string": a_date_string,
+            "a_boolean": a_boolean,
+            "a_png": a_png,
+            "an_svg": an_svg
+        }
+
+        if "id" in kwargs:
+            params["id"] = kwargs["id"]
+
+        self.values.append(
+            Entry(**params)
+        )
+
+        return self.values[-1]
 
 
 class Unit(BaseModel):

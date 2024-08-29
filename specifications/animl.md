@@ -692,7 +692,7 @@ Upper boundary of an interval.
 Multiple Values explicitly specified.
 
 - **values**
-  - Type: Entry[](#entry)
+  - Type: Entry[]
   - Description: I: Individual integer value (32 bits, signed). L: Individual long integer value (64 bits, signed). F: Individual 32-bit floating point value. D: Individual 64-bit floating point value. S: Individual string value. Boolean: Individual boolean value. string: Individual ISO date/time value. PNG: Base 64 encoded PNG image. EmbeddedXML: Value governed by a different XML Schema. SVG: Value governed by the SVG DTD. Used to represent vector graphic images.
 - start_index
   - Type: string
